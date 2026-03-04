@@ -24,18 +24,28 @@ border-radius:10px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-h1{
-color:#2f855a;
-text-align:center;
-}
-
-.details{
-font-size:13px;
-color:gray;
-text-align:center;
+/* Header */
+.header{
+background:#2f855a;
+color:white;
+padding:15px;
+border-radius:8px;
 margin-bottom:15px;
 }
 
+.header h2{
+margin:0;
+}
+
+/* Dashboard */
+.stats{
+background:#f7fafc;
+padding:12px;
+border-radius:8px;
+margin-bottom:15px;
+}
+
+/* Inputs */
 input,textarea,select{
 width:100%;
 padding:10px;
@@ -44,6 +54,7 @@ border-radius:6px;
 border:1px solid #ccc;
 }
 
+/* Button */
 button{
 background:#2f855a;
 color:white;
@@ -54,32 +65,28 @@ cursor:pointer;
 width:100%;
 }
 
+/* Reports */
 .report{
-background:#f7fafc;
-padding:12px;
-border-radius:6px;
-margin-top:10px;
-border-left:5px solid #2f855a;
-}
-
-.stats{
-background:#f7fafc;
-padding:10px;
-border-radius:8px;
-margin-bottom:15px;
+background:white;
+padding:15px;
+border-radius:10px;
+margin-top:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+border-left:6px solid #38a169;
 }
 
 .badge{
 display:none;
 color:green;
 font-weight:bold;
-text-align:center;
 margin-bottom:10px;
 }
 
-img{
-margin-top:6px;
-border-radius:6px;
+footer{
+text-align:center;
+margin-top:20px;
+font-size:12px;
+color:gray;
 }
 
 </style>
@@ -89,11 +96,18 @@ border-radius:6px;
 
 <div class="container">
 
-<h1>EcoReport</h1>
+<div class="header">
+<h2>EcoReport 🌱</h2>
+<p style="margin:5px 0;font-size:14px">
+Community Environmental Monitoring Platform
+</p>
 
-<div class="details">
-Developed by: <b>Aminu</b><br>
-Community Impact Project – Environment Pillar
+<p style="font-size:13px">
+Developed by: <b>Aminu Muhammad</b><br>
+3MTT ID: FE/23/47208556<br>
+Email: aminuastroboy@gmail.com<br>
+Phone: 07081197352
+</p>
 </div>
 
 <h3 id="points">Eco Points: 0</h3>
@@ -107,8 +121,6 @@ Community Impact Project – Environment Pillar
 Reports Submitted: <span id="totalReports">0</span><br>
 High Severity Issues: <span id="highReports">0</span>
 </div>
-
-<p>Report environmental waste issues in your community.</p>
 
 <h3>Report Waste</h3>
 
@@ -137,6 +149,10 @@ High Severity Issues: <span id="highReports">0</span>
 
 <div id="reports"></div>
 
+<footer>
+© 2026 EcoReport | Built for Community Impact Project
+</footer>
+
 </div>
 
 <script>
@@ -146,21 +162,21 @@ let points = 0
 
 function renderReports(){
 
-const reportsDiv = document.getElementById("reports")
+const reportsDiv=document.getElementById("reports")
 reportsDiv.innerHTML=""
 
-let highCount = 0
+let highCount=0
 
-reports.forEach(report => {
+reports.forEach(report=>{
 
-if(report.severity === "High"){
+if(report.severity==="High"){
 highCount++
 }
 
 const div=document.createElement("div")
 div.classList.add("report")
 
-div.innerHTML =
+div.innerHTML=
 "<b>Location:</b> "+report.location+"<br>"+
 "<b>Type:</b> "+report.type+"<br>"+
 "<b>Severity:</b> "+report.severity+"<br>"+
@@ -172,8 +188,8 @@ reportsDiv.appendChild(div)
 
 })
 
-document.getElementById("totalReports").innerText = reports.length
-document.getElementById("highReports").innerText = highCount
+document.getElementById("totalReports").innerText=reports.length
+document.getElementById("highReports").innerText=highCount
 
 }
 
@@ -193,7 +209,7 @@ return
 let photoURL=""
 
 if(photoFile){
-photoURL = URL.createObjectURL(photoFile)
+photoURL=URL.createObjectURL(photoFile)
 }
 
 const report={
@@ -208,12 +224,11 @@ reports.push(report)
 
 localStorage.setItem("ecoReports",JSON.stringify(reports))
 
-points += 10
+points+=10
 
-document.getElementById("points").innerText =
-"Eco Points: " + points
+document.getElementById("points").innerText="Eco Points: "+points
 
-if(points >= 50){
+if(points>=50){
 document.getElementById("badge").style.display="block"
 }
 
