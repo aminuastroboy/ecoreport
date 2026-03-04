@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EcoReport</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+font-family:Arial;
+background:#eef4f7;
+display:flex;
+justify-content:center;
+padding:30px;
+}
+
+.container{
+background:white;
+max-width:650px;
+width:100%;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+color:#2f855a;
+text-align:center;
+}
+
+.details{
+font-size:13px;
+color:gray;
+text-align:center;
+margin-bottom:15px;
+}
+
+input,textarea,select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+background:#2f855a;
+color:white;
+padding:12px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+width:100%;
+}
+
+.report{
+background:#f7fafc;
+padding:12px;
+border-radius:6px;
+margin-top:10px;
+border-left:5px solid #2f855a;
+}
+
+.stats{
+background:#f7fafc;
+padding:10px;
+border-radius:8px;
+margin-bottom:15px;
+}
+
+.badge{
+display:none;
+color:green;
+font-weight:bold;
+text-align:center;
+margin-bottom:10px;
+}
+
+img{
+margin-top:6px;
+border-radius:6px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>EcoReport</h1>
+
+<div class="details">
+Developed by: <b>Aminu</b><br>
+Community Impact Project – Environment Pillar
+</div>
+
+<h3 id="points">Eco Points: 0</h3>
+
+<div id="badge" class="badge">
+🏆 Top Eco Reporter!
+</div>
+
+<div class="stats">
+<b>Community Stats</b><br>
+Reports Submitted: <span id="totalReports">0</span><br>
+High Severity Issues: <span id="highReports">0</span>
+</div>
+
+<p>Report environmental waste issues in your community.</p>
+
+<h3>Report Waste</h3>
+
+<input id="location" placeholder="Location (e.g. Gwagwalada Market)">
+
+<select id="type">
+<option>Plastic Waste</option>
+<option>Organic Waste</option>
+<option>Illegal Dumping</option>
+<option>Blocked Drainage</option>
+</select>
+
+<select id="severity">
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+
+<textarea id="description" placeholder="Describe the issue"></textarea>
+
+<input type="file" id="photo" accept="image/*">
+
+<button onclick="submitReport()">Submit Report</button>
+
+<h3>Community Reports</h3>
+
+<div id="reports"></div>
+
+</div>
+
+<script>
+
+let reports = JSON.parse(localStorage.getItem("ecoReports")) || []
+let points = 0
+
+function renderReports(){
+
+const reportsDiv = document.getElementById("reports")
+reportsDiv.innerHTML=""
+
+let highCount = 0
+
+reports.forEach(report => {
+
+if(report.severity === "High"){
+highCount++
+}
+
+const div=document.createElement("div")
+div.classList.add("report")
+
+div.innerHTML =
+"<b>Location:</b> "+report.location+"<br>"+
+"<b>Type:</b> "+report.type+"<br>"+
+"<b>Severity:</b> "+report.severity+"<br>"+
+"<b>Description:</b> "+report.description+"<br>"+
+(report.photoURL ? "<img src='"+report.photoURL+"' width='100%'>" : "")+
+"<br><a target='_blank' href='https://www.google.com/maps/search/"+report.location+"'>View on Map</a>"
+
+reportsDiv.appendChild(div)
+
+})
+
+document.getElementById("totalReports").innerText = reports.length
+document.getElementById("highReports").innerText = highCount
+
+}
+
+function submitReport(){
+
+const location=document.getElementById("location").value
+const type=document.getElementById("type").value
+const severity=document.getElementById("severity").value
+const description=document.getElementById("description").value
+const photoFile=document.getElementById("photo").files[0]
+
+if(!location || !description){
+alert("Please fill all fields")
+return
+}
+
+let photoURL=""
+
+if(photoFile){
+photoURL = URL.createObjectURL(photoFile)
+}
+
+const report={
+location,
+type,
+severity,
+description,
+photoURL
+}
+
+reports.push(report)
+
+localStorage.setItem("ecoReports",JSON.stringify(reports))
+
+points += 10
+
+document.getElementById("points").innerText =
+"Eco Points: " + points
+
+if(points >= 50){
+document.getElementById("badge").style.display="block"
+}
+
+renderReports()
+
+document.getElementById("location").value=""
+document.getElementById("description").value=""
+document.getElementById("photo").value=""
+
+}
+
+renderReports()
+
+</script>
+
+</body>
+</html>
