@@ -10,21 +10,50 @@
 body{
 font-family:Arial;
 background:#eef4f7;
-display:flex;
-justify-content:center;
-padding:30px;
+margin:0;
 }
 
-.container{
-background:white;
-max-width:650px;
-width:100%;
+/* LANDING PAGE */
+
+#landing{
+text-align:center;
+padding:50px 20px;
+max-width:700px;
+margin:auto;
+}
+
+#landing h1{
+color:#2f855a;
+font-size:40px;
+}
+
+.pitch-box{
+background:#f7fafc;
 padding:25px;
 border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+margin-top:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
 
-/* Header */
+.launch-btn{
+margin-top:20px;
+padding:14px 25px;
+background:#2f855a;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+/* APP */
+
+.container{
+max-width:650px;
+margin:auto;
+padding:25px;
+}
+
 .header{
 background:#2f855a;
 color:white;
@@ -33,11 +62,6 @@ border-radius:8px;
 margin-bottom:15px;
 }
 
-.header h2{
-margin:0;
-}
-
-/* Dashboard */
 .stats{
 background:#f7fafc;
 padding:12px;
@@ -45,7 +69,6 @@ border-radius:8px;
 margin-bottom:15px;
 }
 
-/* Inputs */
 input,textarea,select{
 width:100%;
 padding:10px;
@@ -54,7 +77,6 @@ border-radius:6px;
 border:1px solid #ccc;
 }
 
-/* Button */
 button{
 background:#2f855a;
 color:white;
@@ -65,7 +87,6 @@ cursor:pointer;
 width:100%;
 }
 
-/* Reports */
 .report{
 background:white;
 padding:15px;
@@ -94,13 +115,56 @@ color:gray;
 
 <body>
 
+<!-- LANDING PAGE -->
+
+<div id="landing">
+
+<h1>EcoReport 🌱</h1>
+
+<p style="font-size:18px;color:#444;">
+Community Environmental Monitoring Platform
+</p>
+
+<div class="pitch-box">
+
+<h3>Problem</h3>
+<p>
+Many communities face illegal dumping, plastic pollution,
+and blocked drainage but citizens lack a simple way to report
+environmental problems.
+</p>
+
+<h3>Solution</h3>
+<p>
+EcoReport allows citizens to report waste problems,
+upload photo evidence, mark severity levels,
+and help identify environmental hotspots.
+</p>
+
+<h3>Impact</h3>
+<p>
+Encourages community participation,
+supports authorities with environmental data,
+and promotes cleaner communities.
+</p>
+
+<button class="launch-btn" onclick="startApp()">
+Launch EcoReport
+</button>
+
+</div>
+
+</div>
+
+
+<!-- APP -->
+
+<div id="app" style="display:none">
+
 <div class="container">
 
 <div class="header">
 <h2>EcoReport 🌱</h2>
-<p style="margin:5px 0;font-size:14px">
-Community Environmental Monitoring Platform
-</p>
 
 <p style="font-size:13px">
 Developed by: <b>Aminu Muhammad</b><br>
@@ -155,7 +219,18 @@ High Severity Issues: <span id="highReports">0</span>
 
 </div>
 
+</div>
+
 <script>
+
+/* Landing Page */
+
+function startApp(){
+document.getElementById("landing").style.display="none"
+document.getElementById("app").style.display="block"
+}
+
+/* Data */
 
 let reports = JSON.parse(localStorage.getItem("ecoReports")) || []
 let points = 0
@@ -181,6 +256,7 @@ div.innerHTML=
 "<b>Type:</b> "+report.type+"<br>"+
 "<b>Severity:</b> "+report.severity+"<br>"+
 "<b>Description:</b> "+report.description+"<br>"+
+"<small>Reported: "+report.time+"</small><br>"+
 (report.photoURL ? "<img src='"+report.photoURL+"' width='100%'>" : "")+
 "<br><a target='_blank' href='https://www.google.com/maps/search/"+report.location+"'>View on Map</a>"
 
@@ -192,6 +268,8 @@ document.getElementById("totalReports").innerText=reports.length
 document.getElementById("highReports").innerText=highCount
 
 }
+
+/* Submit Report */
 
 function submitReport(){
 
@@ -217,7 +295,8 @@ location,
 type,
 severity,
 description,
-photoURL
+photoURL,
+time:new Date().toLocaleString()
 }
 
 reports.push(report)
