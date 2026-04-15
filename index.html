@@ -3,26 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ecoreport + Waste-to-Cash</title>
+  <title>Ecoreport</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
       background: #f4f8f5;
       color: #1f2937;
     }
-
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     .app {
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto;
       min-height: 100vh;
       background: #fff;
@@ -82,7 +74,7 @@
 
     .section {
       padding: 18px;
-      padding-bottom: 95px;
+      padding-bottom: 100px;
     }
 
     .card {
@@ -134,39 +126,14 @@
       margin-top: 10px;
     }
 
-    .btn-primary {
-      background: #1f8f4d;
-      color: white;
-    }
+    .btn-primary { background: #1f8f4d; color: white; }
+    .btn-secondary { background: #e5e7eb; color: #111827; }
+    .btn-warning { background: #f59e0b; color: white; }
+    .btn-danger { background: #dc2626; color: white; }
+    .btn-dark { background: #111827; color: white; }
+    .btn-blue { background: #2563eb; color: white; }
 
-    .btn-secondary {
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .btn-warning {
-      background: #f59e0b;
-      color: white;
-    }
-
-    .btn-danger {
-      background: #dc2626;
-      color: white;
-    }
-
-    .btn-dark {
-      background: #111827;
-      color: white;
-    }
-
-    .btn-blue {
-      background: #2563eb;
-      color: white;
-    }
-
-    .input,
-    .select,
-    textarea {
+    .input, .select, textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #d1d5db;
@@ -199,40 +166,13 @@
       font-weight: 600;
     }
 
-    .badge-pending {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .badge-verified {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .badge-resolved {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
-    .badge-open {
-      background: #e0f2fe;
-      color: #075985;
-    }
-
-    .badge-matched {
-      background: #ede9fe;
-      color: #6d28d9;
-    }
-
-    .badge-sold {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .badge-paid {
-      background: #fce7f3;
-      color: #9d174d;
-    }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-verified { background: #dcfce7; color: #166534; }
+    .badge-resolved { background: #dbeafe; color: #1d4ed8; }
+    .badge-open { background: #e0f2fe; color: #075985; }
+    .badge-matched { background: #ede9fe; color: #6d28d9; }
+    .badge-sold { background: #dcfce7; color: #166534; }
+    .badge-paid { background: #fce7f3; color: #9d174d; }
 
     .small {
       font-size: 13px;
@@ -250,22 +190,6 @@
       color: #065f46;
       text-align: center;
       padding: 20px;
-    }
-
-    .top-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .profile-row {
-      margin-bottom: 10px;
-    }
-
-    .profile-row strong {
-      display: block;
-      margin-bottom: 4px;
     }
 
     .fab {
@@ -297,9 +221,7 @@
       z-index: 40;
     }
 
-    .side-menu.show {
-      left: 0;
-    }
+    .side-menu.show { left: 0; }
 
     .side-menu h3 {
       margin-bottom: 16px;
@@ -328,6 +250,13 @@
     .tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .three-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-top: 12px;
     }
@@ -362,6 +291,15 @@
       gap: 10px;
       margin-top: 10px;
     }
+
+    .profile-row {
+      margin-bottom: 10px;
+    }
+
+    .profile-row strong {
+      display: block;
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -369,11 +307,12 @@
     <div id="sideMenu" class="side-menu">
       <h3>Menu</h3>
       <button onclick="navigateTo('dashboardPage')">Home</button>
+      <button onclick="navigateTo('authChooserPage')">Auth Center</button>
       <button onclick="navigateTo('reportPage')">Report Waste Issue</button>
-      <button onclick="navigateTo('mapPage')">Map</button>
       <button onclick="navigateTo('w2cPage')">Waste-to-Cash</button>
       <button onclick="navigateTo('myListingsPage')">My Listings</button>
       <button onclick="navigateTo('vendorPage')">Vendor Marketplace</button>
+      <button onclick="navigateTo('mapPage')">Map</button>
       <button onclick="navigateTo('profilePage')">Profile</button>
       <button onclick="navigateTo('adminLoginPage')">Admin</button>
     </div>
@@ -420,6 +359,11 @@
       </div>
 
       <div class="card">
+        <h3>Who is logged in?</h3>
+        <p class="small" id="sessionSummary">No active session.</p>
+      </div>
+
+      <div class="card">
         <h3>Recent Environmental Reports</h3>
         <div id="recentReports"></div>
       </div>
@@ -430,9 +374,73 @@
       </div>
     </div>
 
+    <div id="authChooserPage" class="section page hidden">
+      <div class="card">
+        <h3>Choose Account Type</h3>
+        <div class="three-tabs">
+          <button class="btn btn-primary" onclick="navigateTo('userAuthPage')">User</button>
+          <button class="btn btn-warning" onclick="navigateTo('sellerAuthPage')">Seller</button>
+          <button class="btn btn-blue" onclick="navigateTo('vendorAuthPage')">Vendor</button>
+        </div>
+        <button class="btn btn-dark" onclick="navigateTo('adminLoginPage')">Admin Login</button>
+      </div>
+    </div>
+
+    <div id="userAuthPage" class="section page hidden">
+      <div class="card">
+        <h3>User Register</h3>
+        <input id="userRegisterName" class="input" placeholder="Full Name" />
+        <input id="userRegisterEmail" class="input" type="email" placeholder="Email" />
+        <input id="userRegisterPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-primary" onclick="userRegister()">Register</button>
+      </div>
+
+      <div class="card">
+        <h3>User Login</h3>
+        <input id="userLoginEmail" class="input" type="email" placeholder="Email" />
+        <input id="userLoginPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-dark" onclick="userLogin()">Login</button>
+      </div>
+    </div>
+
+    <div id="sellerAuthPage" class="section page hidden">
+      <div class="card">
+        <h3>Seller Register</h3>
+        <input id="sellerRegisterName" class="input" placeholder="Full Name" />
+        <input id="sellerRegisterEmail" class="input" type="email" placeholder="Email" />
+        <input id="sellerRegisterPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-warning" onclick="sellerRegister()">Register</button>
+      </div>
+
+      <div class="card">
+        <h3>Seller Login</h3>
+        <input id="sellerLoginEmail" class="input" type="email" placeholder="Email" />
+        <input id="sellerLoginPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-dark" onclick="sellerLogin()">Login</button>
+      </div>
+    </div>
+
+    <div id="vendorAuthPage" class="section page hidden">
+      <div class="card">
+        <h3>Vendor Register</h3>
+        <input id="vendorRegisterName" class="input" placeholder="Business or Vendor Name" />
+        <input id="vendorRegisterEmail" class="input" type="email" placeholder="Email" />
+        <input id="vendorRegisterPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-blue" onclick="vendorRegister()">Register</button>
+      </div>
+
+      <div class="card">
+        <h3>Vendor Login</h3>
+        <input id="vendorLoginEmail" class="input" type="email" placeholder="Email" />
+        <input id="vendorLoginPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-dark" onclick="vendorLogin()">Login</button>
+      </div>
+    </div>
+
     <div id="reportPage" class="section page hidden">
       <div class="card">
         <h3>Report Waste / Pollution Issue</h3>
+        <p class="small" id="reportAuthHint">Login as a user to submit reports.</p>
 
         <label>Issue Type</label>
         <select id="issueType" class="select">
@@ -458,24 +466,10 @@
       </div>
     </div>
 
-    <div id="mapPage" class="section page hidden">
-      <div class="card">
-        <h3>Map View</h3>
-        <div class="map-box">
-          Live environmental hotspot map will appear here.
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Hotspot Reports</h3>
-        <div id="mapReportsList"></div>
-      </div>
-    </div>
-
     <div id="w2cPage" class="section page hidden">
       <div class="card">
         <h3>Waste-to-Cash</h3>
-        <p class="small">List recyclable materials for physical buyers and vendors.</p>
+        <p class="small" id="sellerAuthHint">Login as a seller to post recyclable materials.</p>
 
         <label>Material Type</label>
         <select id="listingMaterial" class="select">
@@ -525,7 +519,8 @@
     <div id="vendorPage" class="section page hidden">
       <div class="card">
         <h3>Vendor Marketplace</h3>
-        <p class="small">Vendors can see available recyclable materials and accept pickup deals.</p>
+        <p class="small" id="vendorWelcomeText">Login to access vendor marketplace.</p>
+        <button id="vendorLogoutBtn" class="btn btn-danger hidden" onclick="vendorLogout()">Logout Vendor</button>
       </div>
 
       <div class="card">
@@ -539,20 +534,34 @@
       </div>
     </div>
 
+    <div id="mapPage" class="section page hidden">
+      <div class="card">
+        <h3>Map View</h3>
+        <div class="map-box">
+          Live environmental hotspot map will appear here.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Hotspot Reports</h3>
+        <div id="mapReportsList"></div>
+      </div>
+    </div>
+
     <div id="profilePage" class="section page hidden">
       <div class="card">
         <h3>My Profile</h3>
         <div class="profile-row">
-          <strong>Name</strong>
-          <p>Aminu Muhammad</p>
+          <strong>User Session</strong>
+          <p id="profileUser">Not logged in</p>
         </div>
         <div class="profile-row">
-          <strong>Role</strong>
-          <p>Community User</p>
+          <strong>Seller Session</strong>
+          <p id="profileSeller">Not logged in</p>
         </div>
         <div class="profile-row">
-          <strong>Focus</strong>
-          <p>Environmental reporting + recyclable sales</p>
+          <strong>Vendor Session</strong>
+          <p id="profileVendor">Not logged in</p>
         </div>
       </div>
 
@@ -561,6 +570,13 @@
         <p>Total reports: <strong id="profileReports">0</strong></p>
         <p>Total listings: <strong id="profileListings">0</strong></p>
         <p>Completed sales: <strong id="profileSales">0</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Logout Options</h3>
+        <button class="btn btn-primary" onclick="userLogout()">Logout User</button>
+        <button class="btn btn-warning" onclick="sellerLogout()">Logout Seller</button>
+        <button class="btn btn-blue" onclick="vendorLogout()">Logout Vendor</button>
       </div>
     </div>
 
@@ -626,9 +642,20 @@
   </div>
 
   <script>
+    const USERS_KEY = "ecoreport_users";
+    const CURRENT_USER_KEY = "ecoreport_current_user";
+
+    const SELLERS_KEY = "ecoreport_sellers";
+    const CURRENT_SELLER_KEY = "ecoreport_current_seller";
+
+    const VENDORS_KEY = "ecoreport_vendors";
+    const CURRENT_VENDOR_KEY = "ecoreport_current_vendor";
+
+    const ADMIN_KEY = "ecoreport_admin_session";
+
     const REPORTS_KEY = "ecoreport_issue_reports";
     const LISTINGS_KEY = "ecoreport_w2c_listings";
-    const ADMIN_KEY = "ecoreport_admin_session";
+
     const ADMIN_USER = "admin";
     const ADMIN_PASS = "admin123";
 
@@ -648,14 +675,78 @@
       return localStorage.getItem(ADMIN_KEY) === "true";
     }
 
+    function getUsers() {
+      return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      return JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+    }
+
+    function setCurrentUser(user) {
+      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+    }
+
+    function clearCurrentUser() {
+      localStorage.removeItem(CURRENT_USER_KEY);
+    }
+
+    function getSellers() {
+      return JSON.parse(localStorage.getItem(SELLERS_KEY)) || [];
+    }
+
+    function saveSellers(sellers) {
+      localStorage.setItem(SELLERS_KEY, JSON.stringify(sellers));
+    }
+
+    function getCurrentSeller() {
+      return JSON.parse(localStorage.getItem(CURRENT_SELLER_KEY));
+    }
+
+    function setCurrentSeller(seller) {
+      localStorage.setItem(CURRENT_SELLER_KEY, JSON.stringify(seller));
+    }
+
+    function clearCurrentSeller() {
+      localStorage.removeItem(CURRENT_SELLER_KEY);
+    }
+
+    function getVendors() {
+      return JSON.parse(localStorage.getItem(VENDORS_KEY)) || [];
+    }
+
+    function saveVendors(vendors) {
+      localStorage.setItem(VENDORS_KEY, JSON.stringify(vendors));
+    }
+
+    function getCurrentVendor() {
+      return JSON.parse(localStorage.getItem(CURRENT_VENDOR_KEY));
+    }
+
+    function setCurrentVendor(vendor) {
+      localStorage.setItem(CURRENT_VENDOR_KEY, JSON.stringify(vendor));
+    }
+
+    function clearCurrentVendor() {
+      localStorage.removeItem(CURRENT_VENDOR_KEY);
+    }
+
     function updateTitle(pageId) {
       const titles = {
         dashboardPage: "Dashboard",
+        authChooserPage: "Auth Center",
+        userAuthPage: "User Login / Register",
+        sellerAuthPage: "Seller Login / Register",
+        vendorAuthPage: "Vendor Login / Register",
         reportPage: "Report Waste Issue",
-        mapPage: "Map",
         w2cPage: "Waste-to-Cash",
         myListingsPage: "My Listings",
         vendorPage: "Vendor Marketplace",
+        mapPage: "Map",
         profilePage: "Profile",
         adminLoginPage: "Admin Login",
         adminPage: "Admin Panel"
@@ -665,12 +756,24 @@
 
     function updateBottomNav(pageId) {
       document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
-      if (pageId === "dashboardPage") document.getElementById("navDashboard").classList.add("active");
-      if (pageId === "reportPage") document.getElementById("navReport").classList.add("active");
-      if (pageId === "w2cPage" || pageId === "myListingsPage" || pageId === "vendorPage") {
+      if (pageId === "dashboardPage" || pageId === "authChooserPage") {
+        document.getElementById("navDashboard").classList.add("active");
+      }
+      if (pageId === "reportPage" || pageId === "userAuthPage") {
+        document.getElementById("navReport").classList.add("active");
+      }
+      if (
+        pageId === "w2cPage" ||
+        pageId === "myListingsPage" ||
+        pageId === "vendorPage" ||
+        pageId === "vendorAuthPage" ||
+        pageId === "sellerAuthPage"
+      ) {
         document.getElementById("navW2C").classList.add("active");
       }
-      if (pageId === "profilePage") document.getElementById("navProfile").classList.add("active");
+      if (pageId === "profilePage") {
+        document.getElementById("navProfile").classList.add("active");
+      }
     }
 
     function showPage(pageId, addToHistory = true) {
@@ -714,7 +817,176 @@
       document.getElementById("menuOverlay").classList.add("hidden");
     }
 
+    function userRegister() {
+      const name = document.getElementById("userRegisterName").value.trim();
+      const email = document.getElementById("userRegisterEmail").value.trim().toLowerCase();
+      const password = document.getElementById("userRegisterPassword").value.trim();
+
+      if (!name || !email || !password) {
+        alert("Please complete all user registration fields.");
+        return;
+      }
+
+      const users = getUsers();
+      if (users.some(u => u.email === email)) {
+        alert("User already exists.");
+        return;
+      }
+
+      users.push({ id: Date.now(), name, email, password });
+      saveUsers(users);
+
+      document.getElementById("userRegisterName").value = "";
+      document.getElementById("userRegisterEmail").value = "";
+      document.getElementById("userRegisterPassword").value = "";
+
+      alert("User account created successfully.");
+    }
+
+    function userLogin() {
+      const email = document.getElementById("userLoginEmail").value.trim().toLowerCase();
+      const password = document.getElementById("userLoginPassword").value.trim();
+
+      const user = getUsers().find(u => u.email === email && u.password === password);
+      if (!user) {
+        alert("Invalid user login.");
+        return;
+      }
+
+      setCurrentUser(user);
+      document.getElementById("userLoginEmail").value = "";
+      document.getElementById("userLoginPassword").value = "";
+      navigateTo("reportPage");
+    }
+
+    function userLogout() {
+      clearCurrentUser();
+      renderUI();
+      navigateTo("dashboardPage");
+    }
+
+    function sellerRegister() {
+      const name = document.getElementById("sellerRegisterName").value.trim();
+      const email = document.getElementById("sellerRegisterEmail").value.trim().toLowerCase();
+      const password = document.getElementById("sellerRegisterPassword").value.trim();
+
+      if (!name || !email || !password) {
+        alert("Please complete all seller registration fields.");
+        return;
+      }
+
+      const sellers = getSellers();
+      if (sellers.some(s => s.email === email)) {
+        alert("Seller already exists.");
+        return;
+      }
+
+      sellers.push({ id: Date.now(), name, email, password });
+      saveSellers(sellers);
+
+      document.getElementById("sellerRegisterName").value = "";
+      document.getElementById("sellerRegisterEmail").value = "";
+      document.getElementById("sellerRegisterPassword").value = "";
+
+      alert("Seller account created successfully.");
+    }
+
+    function sellerLogin() {
+      const email = document.getElementById("sellerLoginEmail").value.trim().toLowerCase();
+      const password = document.getElementById("sellerLoginPassword").value.trim();
+
+      const seller = getSellers().find(s => s.email === email && s.password === password);
+      if (!seller) {
+        alert("Invalid seller login.");
+        return;
+      }
+
+      setCurrentSeller(seller);
+      document.getElementById("sellerLoginEmail").value = "";
+      document.getElementById("sellerLoginPassword").value = "";
+      navigateTo("w2cPage");
+    }
+
+    function sellerLogout() {
+      clearCurrentSeller();
+      renderUI();
+      navigateTo("dashboardPage");
+    }
+
+    function vendorRegister() {
+      const name = document.getElementById("vendorRegisterName").value.trim();
+      const email = document.getElementById("vendorRegisterEmail").value.trim().toLowerCase();
+      const password = document.getElementById("vendorRegisterPassword").value.trim();
+
+      if (!name || !email || !password) {
+        alert("Please complete all vendor registration fields.");
+        return;
+      }
+
+      const vendors = getVendors();
+      if (vendors.some(v => v.email === email)) {
+        alert("Vendor already exists.");
+        return;
+      }
+
+      vendors.push({ id: Date.now(), name, email, password });
+      saveVendors(vendors);
+
+      document.getElementById("vendorRegisterName").value = "";
+      document.getElementById("vendorRegisterEmail").value = "";
+      document.getElementById("vendorRegisterPassword").value = "";
+
+      alert("Vendor account created successfully.");
+    }
+
+    function vendorLogin() {
+      const email = document.getElementById("vendorLoginEmail").value.trim().toLowerCase();
+      const password = document.getElementById("vendorLoginPassword").value.trim();
+
+      const vendor = getVendors().find(v => v.email === email && v.password === password);
+      if (!vendor) {
+        alert("Invalid vendor login.");
+        return;
+      }
+
+      setCurrentVendor(vendor);
+      document.getElementById("vendorLoginEmail").value = "";
+      document.getElementById("vendorLoginPassword").value = "";
+      navigateTo("vendorPage");
+    }
+
+    function vendorLogout() {
+      clearCurrentVendor();
+      renderUI();
+      navigateTo("dashboardPage");
+    }
+
+    function adminLogin() {
+      const username = document.getElementById("adminUsername").value.trim();
+      const password = document.getElementById("adminPassword").value.trim();
+
+      if (username === ADMIN_USER && password === ADMIN_PASS) {
+        localStorage.setItem(ADMIN_KEY, "true");
+        document.getElementById("adminUsername").value = "";
+        document.getElementById("adminPassword").value = "";
+        navigateTo("adminPage");
+      } else {
+        alert("Invalid admin login.");
+      }
+    }
+
+    function adminLogout() {
+      localStorage.removeItem(ADMIN_KEY);
+      navigateTo("dashboardPage");
+    }
+
     function submitIssueReport() {
+      const user = getCurrentUser();
+      if (!user) {
+        navigateTo("userAuthPage");
+        return;
+      }
+
       const issueType = document.getElementById("issueType").value;
       const location = document.getElementById("issueLocation").value.trim();
       const description = document.getElementById("issueDescription").value.trim();
@@ -726,6 +998,8 @@
 
       const report = {
         id: Date.now(),
+        userName: user.name,
+        userEmail: user.email,
         issueType,
         location,
         description,
@@ -746,6 +1020,12 @@
     }
 
     function submitW2CListing() {
+      const seller = getCurrentSeller();
+      if (!seller) {
+        navigateTo("sellerAuthPage");
+        return;
+      }
+
       const material = document.getElementById("listingMaterial").value;
       const quantity = document.getElementById("listingQuantity").value;
       const unit = document.getElementById("listingUnit").value;
@@ -760,6 +1040,8 @@
 
       const listing = {
         id: Date.now(),
+        sellerName: seller.name,
+        sellerEmail: seller.email,
         material,
         quantity,
         unit,
@@ -768,6 +1050,7 @@
         notes,
         status: "Open",
         vendorName: "",
+        vendorEmail: "",
         paymentStatus: "Pending",
         date: new Date().toISOString()
       };
@@ -785,25 +1068,6 @@
 
       alert("W2C listing posted successfully.");
       navigateTo("myListingsPage");
-    }
-
-    function adminLogin() {
-      const username = document.getElementById("adminUsername").value.trim();
-      const password = document.getElementById("adminPassword").value.trim();
-
-      if (username === ADMIN_USER && password === ADMIN_PASS) {
-        localStorage.setItem(ADMIN_KEY, "true");
-        document.getElementById("adminUsername").value = "";
-        document.getElementById("adminPassword").value = "";
-        navigateTo("adminPage");
-      } else {
-        alert("Invalid admin login.");
-      }
-    }
-
-    function adminLogout() {
-      localStorage.removeItem(ADMIN_KEY);
-      navigateTo("dashboardPage");
     }
 
     function updateIssueReportStatus(id, newStatus) {
@@ -831,21 +1095,31 @@
     }
 
     function vendorAcceptListing(id) {
+      const vendor = getCurrentVendor();
+      if (!vendor) {
+        navigateTo("vendorAuthPage");
+        return;
+      }
+
       const listing = w2cListings.find(item => item.id === id);
       if (!listing) return;
 
-      const vendorName = prompt("Enter vendor name:");
-      if (!vendorName) return;
-
       listing.status = "Matched";
-      listing.vendorName = vendorName;
+      listing.vendorName = vendor.name;
+      listing.vendorEmail = vendor.email;
       saveW2CListings();
       renderUI();
-      alert("Listing accepted by vendor.");
+      alert("Listing accepted successfully.");
     }
 
     function vendorCompletePickup(id) {
-      const listing = w2cListings.find(item => item.id === id);
+      const vendor = getCurrentVendor();
+      if (!vendor) {
+        navigateTo("vendorAuthPage");
+        return;
+      }
+
+      const listing = w2cListings.find(item => item.id === id && item.vendorEmail === vendor.email);
       if (!listing) return;
 
       listing.status = "Sold";
@@ -909,13 +1183,24 @@
 
     function renderMyListings() {
       const container = document.getElementById("myListingsList");
+      const seller = getCurrentSeller();
 
-      if (!w2cListings.length) {
+      if (!seller) {
+        container.innerHTML = `
+          <p class="small">Please login as a seller first.</p>
+          <button class="btn btn-dark" onclick="navigateTo('sellerAuthPage')">Seller Login / Register</button>
+        `;
+        return;
+      }
+
+      const sellerListings = w2cListings.filter(item => item.sellerEmail === seller.email);
+
+      if (!sellerListings.length) {
         container.innerHTML = `<p class="small">No waste-to-cash listings yet.</p>`;
         return;
       }
 
-      container.innerHTML = w2cListings.map(listing => `
+      container.innerHTML = sellerListings.map(listing => `
         <div class="item-box">
           <strong>${listing.material}</strong>
           <p class="small">${listing.quantity} ${listing.unit}</p>
@@ -931,9 +1216,29 @@
     function renderVendorPage() {
       const availableContainer = document.getElementById("vendorListingsList");
       const acceptedContainer = document.getElementById("vendorAcceptedList");
+      const vendorWelcomeText = document.getElementById("vendorWelcomeText");
+      const vendorLogoutBtn = document.getElementById("vendorLogoutBtn");
+
+      const vendor = getCurrentVendor();
+
+      if (!vendor) {
+        vendorWelcomeText.textContent = "Please login as a vendor first.";
+        vendorLogoutBtn.classList.add("hidden");
+        availableContainer.innerHTML = `
+          <p class="small">Please login as a vendor first.</p>
+          <button class="btn btn-dark" onclick="navigateTo('vendorAuthPage')">Vendor Login / Register</button>
+        `;
+        acceptedContainer.innerHTML = "";
+        return;
+      }
+
+      vendorWelcomeText.textContent = `Logged in as ${vendor.name}`;
+      vendorLogoutBtn.classList.remove("hidden");
 
       const availableListings = w2cListings.filter(item => item.status === "Open");
-      const acceptedListings = w2cListings.filter(item => item.status === "Matched");
+      const acceptedListings = w2cListings.filter(
+        item => item.status === "Matched" && item.vendorEmail === vendor.email
+      );
 
       if (!availableListings.length) {
         availableContainer.innerHTML = `<p class="small">No open listings available.</p>`;
@@ -944,6 +1249,7 @@
             <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
             <p class="small">${listing.location}</p>
             <p class="small">${listing.notes || "No extra notes."}</p>
+            <p class="small">Seller: ${listing.sellerName}</p>
             <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
             <button class="btn btn-blue" onclick="vendorAcceptListing(${listing.id})">Accept Listing</button>
           </div>
@@ -958,7 +1264,8 @@
             <strong>${listing.material}</strong>
             <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
             <p class="small">${listing.location}</p>
-            <p class="small">Vendor: ${listing.vendorName || "Assigned vendor"}</p>
+            <p class="small">Seller: ${listing.sellerName}</p>
+            <p class="small">Vendor: ${listing.vendorName}</p>
             <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
             <button class="btn btn-primary" onclick="vendorCompletePickup(${listing.id})">Mark Pickup Complete</button>
           </div>
@@ -982,6 +1289,7 @@
           <div class="item-box">
             <strong>${report.issueType}</strong>
             <p class="small">${report.location}</p>
+            <p class="small">User: ${report.userName || "Unknown"}</p>
             <p class="small">${report.description || "No description added."}</p>
             <span class="${getIssueBadgeClass(report.status)}">${report.status}</span>
 
@@ -1000,6 +1308,7 @@
           <div class="item-box">
             <strong>${listing.material}</strong>
             <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
+            <p class="small">Seller: ${listing.sellerName || "Unknown"}</p>
             <p class="small">${listing.location}</p>
             <p class="small">${listing.notes || "No extra notes."}</p>
             <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
@@ -1017,6 +1326,34 @@
       }
     }
 
+    function renderSessionSummary() {
+      const user = getCurrentUser();
+      const seller = getCurrentSeller();
+      const vendor = getCurrentVendor();
+
+      const parts = [];
+      if (user) parts.push(`User: ${user.name}`);
+      if (seller) parts.push(`Seller: ${seller.name}`);
+      if (vendor) parts.push(`Vendor: ${vendor.name}`);
+      if (isAdminLoggedIn()) parts.push(`Admin: logged in`);
+
+      document.getElementById("sessionSummary").textContent = parts.length
+        ? parts.join(" | ")
+        : "No active session.";
+
+      document.getElementById("profileUser").textContent = user ? `${user.name} (${user.email})` : "Not logged in";
+      document.getElementById("profileSeller").textContent = seller ? `${seller.name} (${seller.email})` : "Not logged in";
+      document.getElementById("profileVendor").textContent = vendor ? `${vendor.name} (${vendor.email})` : "Not logged in";
+
+      document.getElementById("reportAuthHint").textContent = user
+        ? `Logged in as ${user.name}`
+        : "Login as a user to submit reports.";
+
+      document.getElementById("sellerAuthHint").textContent = seller
+        ? `Logged in as ${seller.name}`
+        : "Login as a seller to post recyclable materials.";
+    }
+
     function renderUI() {
       document.getElementById("totalReports").textContent = issueReports.length;
       document.getElementById("verifiedReports").textContent = issueReports.filter(r => r.status === "Verified").length;
@@ -1027,6 +1364,7 @@
       document.getElementById("profileListings").textContent = w2cListings.length;
       document.getElementById("profileSales").textContent = w2cListings.filter(l => l.status === "Sold").length;
 
+      renderSessionSummary();
       renderIssueReports("recentReports", issueReports.slice(0, 4));
       renderIssueReports("mapReportsList", issueReports);
       renderW2CListings("recentListings", w2cListings.slice(0, 4));
