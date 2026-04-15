@@ -5,24 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecoreport</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
       background: #f4f8f5;
       color: #1f2937;
     }
-
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     .app {
-      max-width: 480px;
+      max-width: 500px;
       margin: 0 auto;
       min-height: 100vh;
       background: #fff;
@@ -37,16 +29,8 @@
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
     }
-
-    .header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    .header p {
-      font-size: 14px;
-      opacity: 0.95;
-    }
+    .header h1 { font-size: 28px; margin-bottom: 8px; }
+    .header p { font-size: 14px; opacity: 0.95; }
 
     .topbar {
       display: flex;
@@ -59,11 +43,7 @@
       top: 0;
       z-index: 20;
     }
-
-    .topbar h3 {
-      font-size: 16px;
-      font-weight: 700;
-    }
+    .topbar h3 { font-size: 16px; font-weight: 700; }
 
     .icon-btn {
       background: none;
@@ -75,10 +55,7 @@
       height: 36px;
       border-radius: 8px;
     }
-
-    .icon-btn:hover {
-      background: #f3f4f6;
-    }
+    .icon-btn:hover { background: #f3f4f6; }
 
     .section {
       padding: 18px;
@@ -86,19 +63,14 @@
     }
 
     .card {
-      background: #ffffff;
+      background: #fff;
       border: 1px solid #e5e7eb;
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-      color: #111827;
-    }
+    .card h3 { margin-bottom: 10px; font-size: 18px; }
 
     .stats {
       display: grid;
@@ -112,13 +84,11 @@
       border-radius: 14px;
       padding: 14px;
     }
-
     .stat-box h4 {
       font-size: 13px;
       color: #166534;
       margin-bottom: 8px;
     }
-
     .stat-box p {
       font-size: 22px;
       font-weight: bold;
@@ -134,30 +104,13 @@
       cursor: pointer;
       margin-top: 10px;
     }
+    .btn-primary { background: #1f8f4d; color: white; }
+    .btn-secondary { background: #e5e7eb; color: #111827; }
+    .btn-warning { background: #f59e0b; color: white; }
+    .btn-danger { background: #dc2626; color: white; }
+    .btn-dark { background: #111827; color: white; }
 
-    .btn-primary {
-      background: #1f8f4d;
-      color: white;
-    }
-
-    .btn-secondary {
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .btn-warning {
-      background: #f59e0b;
-      color: white;
-    }
-
-    .btn-danger {
-      background: #dc2626;
-      color: white;
-    }
-
-    .input,
-    .select,
-    textarea {
+    .input, .select, textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #d1d5db;
@@ -173,8 +126,7 @@
       min-height: 90px;
     }
 
-    .report-item,
-    .reward-item {
+    .report-item, .reward-item {
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 12px;
@@ -190,21 +142,10 @@
       margin-top: 8px;
       font-weight: 600;
     }
-
-    .badge-pending {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .badge-verified {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .badge-resolved {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-verified { background: #dcfce7; color: #166534; }
+    .badge-resolved { background: #dbeafe; color: #1d4ed8; }
+    .badge-claimed { background: #ede9fe; color: #6d28d9; }
 
     .nav {
       position: sticky;
@@ -215,7 +156,6 @@
       border-top: 1px solid #e5e7eb;
       z-index: 15;
     }
-
     .nav button {
       border: none;
       background: white;
@@ -224,7 +164,6 @@
       cursor: pointer;
       color: #4b5563;
     }
-
     .nav button.active {
       color: #1f8f4d;
       font-weight: bold;
@@ -250,19 +189,9 @@
       margin-top: 14px;
     }
 
-    .small {
-      font-size: 13px;
-      color: #6b7280;
-    }
-
-    .profile-row {
-      margin-bottom: 10px;
-    }
-
-    .profile-row strong {
-      display: block;
-      margin-bottom: 4px;
-    }
+    .small { font-size: 13px; color: #6b7280; }
+    .profile-row { margin-bottom: 10px; }
+    .profile-row strong { display: block; margin-bottom: 4px; }
 
     .fab {
       position: fixed;
@@ -292,16 +221,8 @@
       transition: left 0.3s ease;
       z-index: 40;
     }
-
-    .side-menu.show {
-      left: 0;
-    }
-
-    .side-menu h3 {
-      margin-bottom: 16px;
-      color: #1f8f4d;
-    }
-
+    .side-menu.show { left: 0; }
+    .side-menu h3 { margin-bottom: 16px; color: #1f8f4d; }
     .side-menu button {
       width: 100%;
       margin-bottom: 10px;
@@ -320,6 +241,19 @@
       background: rgba(0,0,0,0.3);
       z-index: 35;
     }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .admin-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
   </style>
 </head>
 <body>
@@ -331,6 +265,7 @@
       <button onclick="navigateTo('mapPage')">Map</button>
       <button onclick="navigateTo('rewardsPage')">Rewards</button>
       <button onclick="navigateTo('profilePage')">Profile</button>
+      <button onclick="navigateTo('adminLoginPage')">Admin</button>
     </div>
 
     <div id="menuOverlay" class="overlay hidden" onclick="toggleSideMenu()"></div>
@@ -346,7 +281,6 @@
       <button class="icon-btn" onclick="toggleSideMenu()">☰</button>
     </div>
 
-    <!-- DASHBOARD -->
     <div id="dashboardPage" class="section page">
       <div class="card">
         <h3>Overview</h3>
@@ -381,7 +315,6 @@
       </div>
     </div>
 
-    <!-- REPORT PAGE -->
     <div id="reportPage" class="section page hidden">
       <div class="card">
         <h3>Submit Waste Report</h3>
@@ -410,7 +343,6 @@
       </div>
     </div>
 
-    <!-- MAP PAGE -->
     <div id="mapPage" class="section page hidden">
       <div class="card">
         <h3>Map View</h3>
@@ -426,23 +358,20 @@
       </div>
     </div>
 
-    <!-- REWARDS PAGE -->
     <div id="rewardsPage" class="section page hidden">
       <div class="card">
-        <h3>Rewards & Points</h3>
-        <p><strong>Current Balance:</strong> <span id="rewardPoints">0</span> points</p>
-        <p class="small">Earn points when your reports are verified and resolved.</p>
+        <h3>Rewards & Cash</h3>
+        <p><strong>Points:</strong> <span id="rewardPoints">0</span></p>
+        <p><strong>Cash Value:</strong> ₦<span id="rewardCash">0</span></p>
+        <p class="small">Resolved reports can be claimed for cash rewards.</p>
       </div>
 
       <div class="card">
-        <h3>How You Earn</h3>
-        <div class="reward-item">+10 points for submitting a report</div>
-        <div class="reward-item">+20 points when a report is verified</div>
-        <div class="reward-item">+30 points when a report is marked resolved</div>
+        <h3>Claimable Rewards</h3>
+        <div id="rewardsList"></div>
       </div>
     </div>
 
-    <!-- PROFILE PAGE -->
     <div id="profilePage" class="section page hidden">
       <div class="card">
         <h3>My Profile</h3>
@@ -467,6 +396,52 @@
       </div>
     </div>
 
+    <div id="adminLoginPage" class="section page hidden">
+      <div class="card">
+        <h3>Admin Login</h3>
+        <input id="adminUsername" class="input" placeholder="Username" />
+        <input id="adminPassword" class="input" type="password" placeholder="Password" />
+        <button class="btn btn-dark" onclick="adminLogin()">Login</button>
+        <p class="small">Default: admin / admin123</p>
+      </div>
+    </div>
+
+    <div id="adminPage" class="section page hidden">
+      <div class="card">
+        <div class="admin-top">
+          <button class="btn btn-secondary" onclick="renderAdminReports()">Refresh</button>
+          <button class="btn btn-danger" onclick="adminLogout()">Logout</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Admin Dashboard</h3>
+        <div class="stats">
+          <div class="stat-box">
+            <h4>Pending</h4>
+            <p id="adminPending">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Verified</h4>
+            <p id="adminVerified">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Resolved</h4>
+            <p id="adminResolved">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Total</h4>
+            <p id="adminTotal">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Manage Reports</h3>
+        <div id="adminReportsList"></div>
+      </div>
+    </div>
+
     <button class="fab" onclick="navigateTo('reportPage')">+</button>
 
     <div class="nav">
@@ -479,11 +454,23 @@
 
   <script>
     const STORAGE_KEY = "ecoreport_reports";
+    const ADMIN_KEY = "ecoreport_admin_session";
+    const ADMIN_USER = "admin";
+    const ADMIN_PASS = "admin123";
+
     let reports = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     let pageHistory = [];
 
     function saveReports() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
+    }
+
+    function isAdminLoggedIn() {
+      return localStorage.getItem(ADMIN_KEY) === "true";
+    }
+
+    function convertPointsToCash(points) {
+      return (points * 0.5).toFixed(2);
     }
 
     function updateTitle(pageId) {
@@ -492,14 +479,15 @@
         reportPage: "Report Waste",
         mapPage: "Map",
         rewardsPage: "Rewards",
-        profilePage: "Profile"
+        profilePage: "Profile",
+        adminLoginPage: "Admin Login",
+        adminPage: "Admin Panel"
       };
       document.getElementById("pageTitle").textContent = titles[pageId] || "Ecoreport";
     }
 
     function updateBottomNav(pageId) {
       document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
-
       if (pageId === "dashboardPage") document.getElementById("navDashboard").classList.add("active");
       if (pageId === "reportPage") document.getElementById("navReport").classList.add("active");
       if (pageId === "mapPage") document.getElementById("navMap").classList.add("active");
@@ -521,6 +509,9 @@
     }
 
     function navigateTo(pageId) {
+      if (pageId === "adminPage" && !isAdminLoggedIn()) {
+        pageId = "adminLoginPage";
+      }
       showPage(pageId, true);
       closeSideMenu();
     }
@@ -530,7 +521,6 @@
         showPage("dashboardPage", false);
         return;
       }
-
       const lastPage = pageHistory.pop();
       showPage(lastPage, false);
     }
@@ -562,7 +552,8 @@
         description,
         status: "Pending",
         points: 10,
-        date: new Date().toLocaleString()
+        rewardStatus: "Unclaimed",
+        date: new Date().toISOString()
       };
 
       reports.unshift(report);
@@ -577,6 +568,67 @@
       navigateTo("dashboardPage");
     }
 
+    function adminLogin() {
+      const username = document.getElementById("adminUsername").value.trim();
+      const password = document.getElementById("adminPassword").value.trim();
+
+      if (username === ADMIN_USER && password === ADMIN_PASS) {
+        localStorage.setItem(ADMIN_KEY, "true");
+        document.getElementById("adminUsername").value = "";
+        document.getElementById("adminPassword").value = "";
+        navigateTo("adminPage");
+      } else {
+        alert("Invalid admin login.");
+      }
+    }
+
+    function adminLogout() {
+      localStorage.removeItem(ADMIN_KEY);
+      navigateTo("dashboardPage");
+    }
+
+    function updateReportStatus(id, newStatus) {
+      const report = reports.find(r => r.id === id);
+      if (!report) return;
+
+      if (report.status === newStatus) return;
+
+      if (newStatus === "Verified" && report.status === "Pending") {
+        report.points += 20;
+      }
+
+      if (newStatus === "Resolved" && report.status !== "Resolved") {
+        if (report.status === "Pending") {
+          report.points += 20;
+        }
+        report.points += 30;
+      }
+
+      report.status = newStatus;
+      saveReports();
+      renderUI();
+    }
+
+    function claimReward(id) {
+      const report = reports.find(r => r.id === id);
+      if (!report) return;
+
+      if (report.status !== "Resolved") {
+        alert("Only resolved reports can be claimed.");
+        return;
+      }
+
+      if (report.rewardStatus === "Claimed") {
+        alert("Reward already claimed.");
+        return;
+      }
+
+      report.rewardStatus = "Claimed";
+      saveReports();
+      renderUI();
+      alert("Reward claimed successfully 🎉");
+    }
+
     function getBadgeClass(status) {
       if (status === "Verified") return "badge badge-verified";
       if (status === "Resolved") return "badge badge-resolved";
@@ -585,7 +637,6 @@
 
     function renderReports(containerId, items) {
       const container = document.getElementById(containerId);
-
       if (!items.length) {
         container.innerHTML = `<p class="small">No reports yet.</p>`;
         return;
@@ -596,8 +647,68 @@
           <strong>${report.wasteType}</strong>
           <p class="small">${report.location}</p>
           <p class="small">${report.description || "No description added."}</p>
-          <p class="small">${report.date}</p>
+          <p class="small">${new Date(report.date).toLocaleString()}</p>
           <span class="${getBadgeClass(report.status)}">${report.status}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderRewards() {
+      const container = document.getElementById("rewardsList");
+      if (!reports.length) {
+        container.innerHTML = `<p class="small">No rewards yet.</p>`;
+        return;
+      }
+
+      container.innerHTML = reports.map(report => `
+        <div class="reward-item">
+          <strong>${report.wasteType}</strong>
+          <p class="small">${report.location}</p>
+          <p><strong>${report.points}</strong> points • ₦${convertPointsToCash(report.points)}</p>
+          <span class="${getBadgeClass(report.status)}">${report.status}</span>
+          <div style="margin-top:8px;">
+            ${
+              report.status === "Resolved" && report.rewardStatus !== "Claimed"
+                ? `<button class="btn btn-primary" onclick="claimReward(${report.id})">Claim Reward</button>`
+                : report.rewardStatus === "Claimed"
+                ? `<span class="badge badge-claimed">Claimed</span>`
+                : `<p class="small">Available after resolution</p>`
+            }
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderAdminReports() {
+      const container = document.getElementById("adminReportsList");
+      const pending = reports.filter(r => r.status === "Pending").length;
+      const verified = reports.filter(r => r.status === "Verified").length;
+      const resolved = reports.filter(r => r.status === "Resolved").length;
+
+      document.getElementById("adminPending").textContent = pending;
+      document.getElementById("adminVerified").textContent = verified;
+      document.getElementById("adminResolved").textContent = resolved;
+      document.getElementById("adminTotal").textContent = reports.length;
+
+      if (!reports.length) {
+        container.innerHTML = `<p class="small">No reports submitted yet.</p>`;
+        return;
+      }
+
+      container.innerHTML = reports.map(report => `
+        <div class="report-item">
+          <strong>${report.wasteType}</strong>
+          <p class="small">${report.location}</p>
+          <p class="small">${report.description || "No description added."}</p>
+          <p class="small">${new Date(report.date).toLocaleString()}</p>
+          <p><strong>Points:</strong> ${report.points}</p>
+          <p><strong>Reward:</strong> ${report.rewardStatus}</p>
+          <span class="${getBadgeClass(report.status)}">${report.status}</span>
+
+          <div class="action-row">
+            <button class="btn btn-warning" onclick="updateReportStatus(${report.id}, 'Verified')">Verify</button>
+            <button class="btn btn-primary" onclick="updateReportStatus(${report.id}, 'Resolved')">Resolve</button>
+          </div>
         </div>
       `).join("");
     }
@@ -613,14 +724,20 @@
       document.getElementById("resolvedReports").textContent = resolvedReports;
       document.getElementById("ecoPoints").textContent = ecoPoints;
       document.getElementById("rewardPoints").textContent = ecoPoints;
+      document.getElementById("rewardCash").textContent = convertPointsToCash(ecoPoints);
       document.getElementById("profileReports").textContent = totalReports;
       document.getElementById("profilePoints").textContent = ecoPoints;
 
       renderReports("recentReports", reports.slice(0, 4));
       renderReports("mapReportsList", reports);
+      renderRewards();
+      renderAdminReports();
     }
 
     renderUI();
+    if (isAdminLoggedIn()) {
+      // keeps admin session remembered
+    }
   </script>
 </body>
 </html>
