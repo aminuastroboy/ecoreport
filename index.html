@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ecoreport</title>
+  <title>Ecoreport + Waste-to-Cash</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #f4f8f5;
       color: #1f2937;
     }
-    .hidden { display: none !important; }
+
+    .hidden {
+      display: none !important;
+    }
 
     .app {
       max-width: 500px;
@@ -29,8 +37,16 @@
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
     }
-    .header h1 { font-size: 28px; margin-bottom: 8px; }
-    .header p { font-size: 14px; opacity: 0.95; }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 14px;
+      opacity: 0.95;
+    }
 
     .topbar {
       display: flex;
@@ -43,7 +59,11 @@
       top: 0;
       z-index: 20;
     }
-    .topbar h3 { font-size: 16px; font-weight: 700; }
+
+    .topbar h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
 
     .icon-btn {
       background: none;
@@ -55,11 +75,14 @@
       height: 36px;
       border-radius: 8px;
     }
-    .icon-btn:hover { background: #f3f4f6; }
+
+    .icon-btn:hover {
+      background: #f3f4f6;
+    }
 
     .section {
       padding: 18px;
-      padding-bottom: 90px;
+      padding-bottom: 95px;
     }
 
     .card {
@@ -70,7 +93,11 @@
       margin-bottom: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
-    .card h3 { margin-bottom: 10px; font-size: 18px; }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
 
     .stats {
       display: grid;
@@ -84,11 +111,13 @@
       border-radius: 14px;
       padding: 14px;
     }
+
     .stat-box h4 {
       font-size: 13px;
       color: #166534;
       margin-bottom: 8px;
     }
+
     .stat-box p {
       font-size: 22px;
       font-weight: bold;
@@ -104,13 +133,35 @@
       cursor: pointer;
       margin-top: 10px;
     }
-    .btn-primary { background: #1f8f4d; color: white; }
-    .btn-secondary { background: #e5e7eb; color: #111827; }
-    .btn-warning { background: #f59e0b; color: white; }
-    .btn-danger { background: #dc2626; color: white; }
-    .btn-dark { background: #111827; color: white; }
 
-    .input, .select, textarea {
+    .btn-primary {
+      background: #1f8f4d;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-warning {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-dark {
+      background: #111827;
+      color: white;
+    }
+
+    .input,
+    .select,
+    textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #d1d5db;
@@ -126,7 +177,7 @@
       min-height: 90px;
     }
 
-    .report-item, .reward-item {
+    .item-box {
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 12px;
@@ -142,31 +193,40 @@
       margin-top: 8px;
       font-weight: 600;
     }
-    .badge-pending { background: #fef3c7; color: #92400e; }
-    .badge-verified { background: #dcfce7; color: #166534; }
-    .badge-resolved { background: #dbeafe; color: #1d4ed8; }
-    .badge-claimed { background: #ede9fe; color: #6d28d9; }
 
-    .nav {
-      position: sticky;
-      bottom: 0;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: white;
-      border-top: 1px solid #e5e7eb;
-      z-index: 15;
+    .badge-pending {
+      background: #fef3c7;
+      color: #92400e;
     }
-    .nav button {
-      border: none;
-      background: white;
-      padding: 14px 8px;
+
+    .badge-verified {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-resolved {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .badge-open {
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .badge-matched {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .badge-sold {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .small {
       font-size: 13px;
-      cursor: pointer;
-      color: #4b5563;
-    }
-    .nav button.active {
-      color: #1f8f4d;
-      font-weight: bold;
+      color: #6b7280;
     }
 
     .map-box {
@@ -189,9 +249,14 @@
       margin-top: 14px;
     }
 
-    .small { font-size: 13px; color: #6b7280; }
-    .profile-row { margin-bottom: 10px; }
-    .profile-row strong { display: block; margin-bottom: 4px; }
+    .profile-row {
+      margin-bottom: 10px;
+    }
+
+    .profile-row strong {
+      display: block;
+      margin-bottom: 4px;
+    }
 
     .fab {
       position: fixed;
@@ -221,8 +286,16 @@
       transition: left 0.3s ease;
       z-index: 40;
     }
-    .side-menu.show { left: 0; }
-    .side-menu h3 { margin-bottom: 16px; color: #1f8f4d; }
+
+    .side-menu.show {
+      left: 0;
+    }
+
+    .side-menu h3 {
+      margin-bottom: 16px;
+      color: #1f8f4d;
+    }
+
     .side-menu button {
       width: 100%;
       margin-bottom: 10px;
@@ -242,17 +315,42 @@
       z-index: 35;
     }
 
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .nav {
+      position: sticky;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      z-index: 15;
+    }
+
+    .nav button {
+      border: none;
+      background: white;
+      padding: 14px 8px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #4b5563;
+    }
+
+    .nav button.active {
+      color: #1f8f4d;
+      font-weight: bold;
+    }
+
     .action-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 10px;
-    }
-
-    .admin-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
     }
   </style>
 </head>
@@ -261,9 +359,10 @@
     <div id="sideMenu" class="side-menu">
       <h3>Menu</h3>
       <button onclick="navigateTo('dashboardPage')">Home</button>
-      <button onclick="navigateTo('reportPage')">Report Waste</button>
+      <button onclick="navigateTo('reportPage')">Report Waste Issue</button>
       <button onclick="navigateTo('mapPage')">Map</button>
-      <button onclick="navigateTo('rewardsPage')">Rewards</button>
+      <button onclick="navigateTo('w2cPage')">Waste-to-Cash</button>
+      <button onclick="navigateTo('myListingsPage')">My Listings</button>
       <button onclick="navigateTo('profilePage')">Profile</button>
       <button onclick="navigateTo('adminLoginPage')">Admin</button>
     </div>
@@ -272,7 +371,7 @@
 
     <div class="header">
       <h1>Ecoreport 🌱</h1>
-      <p>Report waste. Track impact. Earn rewards.</p>
+      <p>Report waste. Track impact. Sell recyclables.</p>
     </div>
 
     <div class="topbar">
@@ -294,51 +393,56 @@
             <p id="verifiedReports">0</p>
           </div>
           <div class="stat-box">
-            <h4>Resolved Issues</h4>
-            <p id="resolvedReports">0</p>
+            <h4>W2C Listings</h4>
+            <p id="totalListings">0</p>
           </div>
           <div class="stat-box">
-            <h4>Eco Points</h4>
-            <p id="ecoPoints">0</p>
+            <h4>Items Sold</h4>
+            <p id="soldListings">0</p>
           </div>
         </div>
 
-        <div class="top-actions">
-          <button class="btn btn-primary" onclick="navigateTo('reportPage')">+ Report Waste</button>
-          <button class="btn btn-warning" onclick="navigateTo('rewardsPage')">View Rewards</button>
+        <div class="tabs">
+          <button class="btn btn-primary" onclick="navigateTo('reportPage')">Report Issue</button>
+          <button class="btn btn-warning" onclick="navigateTo('w2cPage')">Sell Recyclables</button>
         </div>
       </div>
 
       <div class="card">
-        <h3>Recent Reports</h3>
+        <h3>Recent Environmental Reports</h3>
         <div id="recentReports"></div>
+      </div>
+
+      <div class="card">
+        <h3>Recent W2C Listings</h3>
+        <div id="recentListings"></div>
       </div>
     </div>
 
     <div id="reportPage" class="section page hidden">
       <div class="card">
-        <h3>Submit Waste Report</h3>
+        <h3>Report Waste / Pollution Issue</h3>
 
-        <label>Waste Type</label>
-        <select id="wasteType" class="select">
-          <option value="">Select waste type</option>
-          <option>Plastic Waste</option>
+        <label>Issue Type</label>
+        <select id="issueType" class="select">
+          <option value="">Select issue type</option>
           <option>Illegal Dump Site</option>
           <option>Drain Blockage</option>
-          <option>Organic Waste</option>
-          <option>Metal Waste</option>
+          <option>Plastic Pollution</option>
+          <option>Open Burning</option>
+          <option>Waste Overflow</option>
         </select>
 
         <label>Location</label>
-        <input id="locationInput" class="input" placeholder="Enter location or community name" />
+        <input id="issueLocation" class="input" placeholder="Enter location" />
 
         <label>Photo</label>
-        <input id="photoInput" class="input" type="file" accept="image/*" />
+        <input id="issuePhoto" class="input" type="file" accept="image/*" />
 
         <label>Description</label>
-        <textarea id="descriptionInput" placeholder="Describe the waste issue..."></textarea>
+        <textarea id="issueDescription" placeholder="Describe the issue..."></textarea>
 
-        <button class="btn btn-primary" onclick="submitReport()">Submit Report</button>
+        <button class="btn btn-primary" onclick="submitIssueReport()">Submit Report</button>
         <button class="btn btn-secondary" onclick="navigateTo('dashboardPage')">Cancel</button>
       </div>
     </div>
@@ -347,28 +451,63 @@
       <div class="card">
         <h3>Map View</h3>
         <div class="map-box">
-          Live waste hotspot map will appear here.<br><br>
-          This is the frontend placeholder for GPS/map integration.
+          Live environmental hotspot map will appear here.
         </div>
       </div>
 
       <div class="card">
-        <h3>Reported Hotspots</h3>
+        <h3>Hotspot Reports</h3>
         <div id="mapReportsList"></div>
       </div>
     </div>
 
-    <div id="rewardsPage" class="section page hidden">
+    <div id="w2cPage" class="section page hidden">
       <div class="card">
-        <h3>Rewards & Cash</h3>
-        <p><strong>Points:</strong> <span id="rewardPoints">0</span></p>
-        <p><strong>Cash Value:</strong> ₦<span id="rewardCash">0</span></p>
-        <p class="small">Resolved reports can be claimed for cash rewards.</p>
-      </div>
+        <h3>Waste-to-Cash</h3>
+        <p class="small">List recyclable materials for physical buyers and vendors.</p>
 
+        <label>Material Type</label>
+        <select id="listingMaterial" class="select">
+          <option value="">Select material</option>
+          <option>Plastic Bottles</option>
+          <option>Aluminium Cans</option>
+          <option>Cartons</option>
+          <option>Scrap Metal</option>
+          <option>Glass Bottles</option>
+        </select>
+
+        <label>Quantity</label>
+        <input id="listingQuantity" class="input" type="number" placeholder="Enter quantity" />
+
+        <label>Unit</label>
+        <select id="listingUnit" class="select">
+          <option value="">Select unit</option>
+          <option>kg</option>
+          <option>bags</option>
+          <option>pieces</option>
+        </select>
+
+        <label>Pickup Location</label>
+        <input id="listingLocation" class="input" placeholder="Enter pickup location" />
+
+        <label>Price (₦)</label>
+        <input id="listingPrice" class="input" type="number" placeholder="Enter expected price" />
+
+        <label>Photo</label>
+        <input id="listingPhoto" class="input" type="file" accept="image/*" />
+
+        <label>Notes</label>
+        <textarea id="listingNotes" placeholder="Any extra details..."></textarea>
+
+        <button class="btn btn-warning" onclick="submitW2CListing()">Post Listing</button>
+        <button class="btn btn-secondary" onclick="navigateTo('dashboardPage')">Cancel</button>
+      </div>
+    </div>
+
+    <div id="myListingsPage" class="section page hidden">
       <div class="card">
-        <h3>Claimable Rewards</h3>
-        <div id="rewardsList"></div>
+        <h3>My Waste-to-Cash Listings</h3>
+        <div id="myListingsList"></div>
       </div>
     </div>
 
@@ -381,18 +520,19 @@
         </div>
         <div class="profile-row">
           <strong>Role</strong>
-          <p>Community Reporter</p>
+          <p>Community User</p>
         </div>
         <div class="profile-row">
-          <strong>Badge</strong>
-          <p>Eco Starter 🌱</p>
+          <strong>Focus</strong>
+          <p>Environmental reporting + recyclable sales</p>
         </div>
       </div>
 
       <div class="card">
-        <h3>My Impact</h3>
-        <p>Total submissions: <strong id="profileReports">0</strong></p>
-        <p>Points earned: <strong id="profilePoints">0</strong></p>
+        <h3>My Activity</h3>
+        <p>Total reports: <strong id="profileReports">0</strong></p>
+        <p>Total listings: <strong id="profileListings">0</strong></p>
+        <p>Completed sales: <strong id="profileSales">0</strong></p>
       </div>
     </div>
 
@@ -408,8 +548,8 @@
 
     <div id="adminPage" class="section page hidden">
       <div class="card">
-        <div class="admin-top">
-          <button class="btn btn-secondary" onclick="renderAdminReports()">Refresh</button>
+        <div class="tabs">
+          <button class="btn btn-secondary" onclick="renderAdminData()">Refresh</button>
           <button class="btn btn-danger" onclick="adminLogout()">Logout</button>
         </div>
       </div>
@@ -418,67 +558,75 @@
         <h3>Admin Dashboard</h3>
         <div class="stats">
           <div class="stat-box">
-            <h4>Pending</h4>
-            <p id="adminPending">0</p>
+            <h4>Pending Reports</h4>
+            <p id="adminPendingReports">0</p>
           </div>
           <div class="stat-box">
-            <h4>Verified</h4>
-            <p id="adminVerified">0</p>
+            <h4>Resolved Reports</h4>
+            <p id="adminResolvedReports">0</p>
           </div>
           <div class="stat-box">
-            <h4>Resolved</h4>
-            <p id="adminResolved">0</p>
+            <h4>Open Listings</h4>
+            <p id="adminOpenListings">0</p>
           </div>
           <div class="stat-box">
-            <h4>Total</h4>
-            <p id="adminTotal">0</p>
+            <h4>Sold Listings</h4>
+            <p id="adminSoldListings">0</p>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <h3>Manage Reports</h3>
+        <h3>Manage Environmental Reports</h3>
         <div id="adminReportsList"></div>
+      </div>
+
+      <div class="card">
+        <h3>Manage W2C Listings</h3>
+        <div id="adminListingsList"></div>
       </div>
     </div>
 
-    <button class="fab" onclick="navigateTo('reportPage')">+</button>
+    <button class="fab" onclick="navigateTo('w2cPage')">+</button>
 
     <div class="nav">
       <button id="navDashboard" class="active" onclick="navigateTo('dashboardPage')">Home</button>
       <button id="navReport" onclick="navigateTo('reportPage')">Report</button>
-      <button id="navMap" onclick="navigateTo('mapPage')">Map</button>
+      <button id="navW2C" onclick="navigateTo('w2cPage')">W2C</button>
       <button id="navProfile" onclick="navigateTo('profilePage')">Profile</button>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "ecoreport_reports";
+    const REPORTS_KEY = "ecoreport_issue_reports";
+    const LISTINGS_KEY = "ecoreport_w2c_listings";
     const ADMIN_KEY = "ecoreport_admin_session";
     const ADMIN_USER = "admin";
     const ADMIN_PASS = "admin123";
 
-    let reports = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let issueReports = JSON.parse(localStorage.getItem(REPORTS_KEY)) || [];
+    let w2cListings = JSON.parse(localStorage.getItem(LISTINGS_KEY)) || [];
     let pageHistory = [];
 
-    function saveReports() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
+    function saveIssueReports() {
+      localStorage.setItem(REPORTS_KEY, JSON.stringify(issueReports));
+    }
+
+    function saveW2CListings() {
+      localStorage.setItem(LISTINGS_KEY, JSON.stringify(w2cListings));
     }
 
     function isAdminLoggedIn() {
       return localStorage.getItem(ADMIN_KEY) === "true";
     }
 
-    function convertPointsToCash(points) {
-      return (points * 0.5).toFixed(2);
-    }
-
     function updateTitle(pageId) {
       const titles = {
         dashboardPage: "Dashboard",
-        reportPage: "Report Waste",
+        reportPage: "Report Waste Issue",
         mapPage: "Map",
-        rewardsPage: "Rewards",
+        w2cPage: "Waste-to-Cash",
+        myListingsPage: "My Listings",
         profilePage: "Profile",
         adminLoginPage: "Admin Login",
         adminPage: "Admin Panel"
@@ -490,7 +638,7 @@
       document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
       if (pageId === "dashboardPage") document.getElementById("navDashboard").classList.add("active");
       if (pageId === "reportPage") document.getElementById("navReport").classList.add("active");
-      if (pageId === "mapPage") document.getElementById("navMap").classList.add("active");
+      if (pageId === "w2cPage" || pageId === "myListingsPage") document.getElementById("navW2C").classList.add("active");
       if (pageId === "profilePage") document.getElementById("navProfile").classList.add("active");
     }
 
@@ -535,37 +683,77 @@
       document.getElementById("menuOverlay").classList.add("hidden");
     }
 
-    function submitReport() {
-      const wasteType = document.getElementById("wasteType").value;
-      const location = document.getElementById("locationInput").value.trim();
-      const description = document.getElementById("descriptionInput").value.trim();
+    function submitIssueReport() {
+      const issueType = document.getElementById("issueType").value;
+      const location = document.getElementById("issueLocation").value.trim();
+      const description = document.getElementById("issueDescription").value.trim();
 
-      if (!wasteType || !location) {
-        alert("Please fill in waste type and location.");
+      if (!issueType || !location) {
+        alert("Please fill in issue type and location.");
         return;
       }
 
       const report = {
         id: Date.now(),
-        wasteType,
+        issueType,
         location,
         description,
         status: "Pending",
-        points: 10,
-        rewardStatus: "Unclaimed",
         date: new Date().toISOString()
       };
 
-      reports.unshift(report);
-      saveReports();
+      issueReports.unshift(report);
+      saveIssueReports();
 
-      document.getElementById("wasteType").value = "";
-      document.getElementById("locationInput").value = "";
-      document.getElementById("descriptionInput").value = "";
-      document.getElementById("photoInput").value = "";
+      document.getElementById("issueType").value = "";
+      document.getElementById("issueLocation").value = "";
+      document.getElementById("issueDescription").value = "";
+      document.getElementById("issuePhoto").value = "";
 
-      alert("Report submitted successfully.");
+      alert("Environmental report submitted.");
       navigateTo("dashboardPage");
+    }
+
+    function submitW2CListing() {
+      const material = document.getElementById("listingMaterial").value;
+      const quantity = document.getElementById("listingQuantity").value;
+      const unit = document.getElementById("listingUnit").value;
+      const location = document.getElementById("listingLocation").value.trim();
+      const price = document.getElementById("listingPrice").value;
+      const notes = document.getElementById("listingNotes").value.trim();
+
+      if (!material || !quantity || !unit || !location || !price) {
+        alert("Please complete the listing form.");
+        return;
+      }
+
+      const listing = {
+        id: Date.now(),
+        material,
+        quantity,
+        unit,
+        location,
+        price,
+        notes,
+        status: "Open",
+        buyer: "",
+        paymentStatus: "Pending",
+        date: new Date().toISOString()
+      };
+
+      w2cListings.unshift(listing);
+      saveW2CListings();
+
+      document.getElementById("listingMaterial").value = "";
+      document.getElementById("listingQuantity").value = "";
+      document.getElementById("listingUnit").value = "";
+      document.getElementById("listingLocation").value = "";
+      document.getElementById("listingPrice").value = "";
+      document.getElementById("listingNotes").value = "";
+      document.getElementById("listingPhoto").value = "";
+
+      alert("W2C listing posted successfully.");
+      navigateTo("myListingsPage");
     }
 
     function adminLogin() {
@@ -587,157 +775,170 @@
       navigateTo("dashboardPage");
     }
 
-    function updateReportStatus(id, newStatus) {
-      const report = reports.find(r => r.id === id);
+    function updateIssueReportStatus(id, newStatus) {
+      const report = issueReports.find(item => item.id === id);
       if (!report) return;
-
-      if (report.status === newStatus) return;
-
-      if (newStatus === "Verified" && report.status === "Pending") {
-        report.points += 20;
-      }
-
-      if (newStatus === "Resolved" && report.status !== "Resolved") {
-        if (report.status === "Pending") {
-          report.points += 20;
-        }
-        report.points += 30;
-      }
-
       report.status = newStatus;
-      saveReports();
+      saveIssueReports();
       renderUI();
     }
 
-    function claimReward(id) {
-      const report = reports.find(r => r.id === id);
-      if (!report) return;
-
-      if (report.status !== "Resolved") {
-        alert("Only resolved reports can be claimed.");
-        return;
-      }
-
-      if (report.rewardStatus === "Claimed") {
-        alert("Reward already claimed.");
-        return;
-      }
-
-      report.rewardStatus = "Claimed";
-      saveReports();
+    function updateListingStatus(id, newStatus) {
+      const listing = w2cListings.find(item => item.id === id);
+      if (!listing) return;
+      listing.status = newStatus;
+      saveW2CListings();
       renderUI();
-      alert("Reward claimed successfully 🎉");
     }
 
-    function getBadgeClass(status) {
+    function markListingPaid(id) {
+      const listing = w2cListings.find(item => item.id === id);
+      if (!listing) return;
+      listing.paymentStatus = "Paid";
+      saveW2CListings();
+      renderUI();
+    }
+
+    function getIssueBadgeClass(status) {
       if (status === "Verified") return "badge badge-verified";
       if (status === "Resolved") return "badge badge-resolved";
       return "badge badge-pending";
     }
 
-    function renderReports(containerId, items) {
+    function getListingBadgeClass(status) {
+      if (status === "Matched") return "badge badge-matched";
+      if (status === "Sold") return "badge badge-sold";
+      return "badge badge-open";
+    }
+
+    function renderIssueReports(containerId, items) {
       const container = document.getElementById(containerId);
+
       if (!items.length) {
         container.innerHTML = `<p class="small">No reports yet.</p>`;
         return;
       }
 
       container.innerHTML = items.map(report => `
-        <div class="report-item">
-          <strong>${report.wasteType}</strong>
+        <div class="item-box">
+          <strong>${report.issueType}</strong>
           <p class="small">${report.location}</p>
           <p class="small">${report.description || "No description added."}</p>
           <p class="small">${new Date(report.date).toLocaleString()}</p>
-          <span class="${getBadgeClass(report.status)}">${report.status}</span>
+          <span class="${getIssueBadgeClass(report.status)}">${report.status}</span>
         </div>
       `).join("");
     }
 
-    function renderRewards() {
-      const container = document.getElementById("rewardsList");
-      if (!reports.length) {
-        container.innerHTML = `<p class="small">No rewards yet.</p>`;
+    function renderW2CListings(containerId, items) {
+      const container = document.getElementById(containerId);
+
+      if (!items.length) {
+        container.innerHTML = `<p class="small">No listings yet.</p>`;
         return;
       }
 
-      container.innerHTML = reports.map(report => `
-        <div class="reward-item">
-          <strong>${report.wasteType}</strong>
-          <p class="small">${report.location}</p>
-          <p><strong>${report.points}</strong> points • ₦${convertPointsToCash(report.points)}</p>
-          <span class="${getBadgeClass(report.status)}">${report.status}</span>
-          <div style="margin-top:8px;">
-            ${
-              report.status === "Resolved" && report.rewardStatus !== "Claimed"
-                ? `<button class="btn btn-primary" onclick="claimReward(${report.id})">Claim Reward</button>`
-                : report.rewardStatus === "Claimed"
-                ? `<span class="badge badge-claimed">Claimed</span>`
-                : `<p class="small">Available after resolution</p>`
-            }
-          </div>
+      container.innerHTML = items.map(listing => `
+        <div class="item-box">
+          <strong>${listing.material}</strong>
+          <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
+          <p class="small">${listing.location}</p>
+          <p class="small">${listing.notes || "No extra notes."}</p>
+          <p class="small">${new Date(listing.date).toLocaleString()}</p>
+          <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+          <p class="small">Payment: ${listing.paymentStatus}</p>
         </div>
       `).join("");
     }
 
-    function renderAdminReports() {
-      const container = document.getElementById("adminReportsList");
-      const pending = reports.filter(r => r.status === "Pending").length;
-      const verified = reports.filter(r => r.status === "Verified").length;
-      const resolved = reports.filter(r => r.status === "Resolved").length;
+    function renderMyListings() {
+      const container = document.getElementById("myListingsList");
 
-      document.getElementById("adminPending").textContent = pending;
-      document.getElementById("adminVerified").textContent = verified;
-      document.getElementById("adminResolved").textContent = resolved;
-      document.getElementById("adminTotal").textContent = reports.length;
-
-      if (!reports.length) {
-        container.innerHTML = `<p class="small">No reports submitted yet.</p>`;
+      if (!w2cListings.length) {
+        container.innerHTML = `<p class="small">No waste-to-cash listings yet.</p>`;
         return;
       }
 
-      container.innerHTML = reports.map(report => `
-        <div class="report-item">
-          <strong>${report.wasteType}</strong>
-          <p class="small">${report.location}</p>
-          <p class="small">${report.description || "No description added."}</p>
-          <p class="small">${new Date(report.date).toLocaleString()}</p>
-          <p><strong>Points:</strong> ${report.points}</p>
-          <p><strong>Reward:</strong> ${report.rewardStatus}</p>
-          <span class="${getBadgeClass(report.status)}">${report.status}</span>
-
-          <div class="action-row">
-            <button class="btn btn-warning" onclick="updateReportStatus(${report.id}, 'Verified')">Verify</button>
-            <button class="btn btn-primary" onclick="updateReportStatus(${report.id}, 'Resolved')">Resolve</button>
-          </div>
+      container.innerHTML = w2cListings.map(listing => `
+        <div class="item-box">
+          <strong>${listing.material}</strong>
+          <p class="small">${listing.quantity} ${listing.unit}</p>
+          <p class="small">Location: ${listing.location}</p>
+          <p class="small">Price: ₦${listing.price}</p>
+          <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+          <p class="small">Payment: ${listing.paymentStatus}</p>
         </div>
       `).join("");
+    }
+
+    function renderAdminData() {
+      document.getElementById("adminPendingReports").textContent = issueReports.filter(r => r.status === "Pending").length;
+      document.getElementById("adminResolvedReports").textContent = issueReports.filter(r => r.status === "Resolved").length;
+      document.getElementById("adminOpenListings").textContent = w2cListings.filter(l => l.status === "Open").length;
+      document.getElementById("adminSoldListings").textContent = w2cListings.filter(l => l.status === "Sold").length;
+
+      const reportsContainer = document.getElementById("adminReportsList");
+      const listingsContainer = document.getElementById("adminListingsList");
+
+      if (!issueReports.length) {
+        reportsContainer.innerHTML = `<p class="small">No reports submitted yet.</p>`;
+      } else {
+        reportsContainer.innerHTML = issueReports.map(report => `
+          <div class="item-box">
+            <strong>${report.issueType}</strong>
+            <p class="small">${report.location}</p>
+            <p class="small">${report.description || "No description added."}</p>
+            <span class="${getIssueBadgeClass(report.status)}">${report.status}</span>
+
+            <div class="action-row">
+              <button class="btn btn-warning" onclick="updateIssueReportStatus(${report.id}, 'Verified')">Verify</button>
+              <button class="btn btn-primary" onclick="updateIssueReportStatus(${report.id}, 'Resolved')">Resolve</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      if (!w2cListings.length) {
+        listingsContainer.innerHTML = `<p class="small">No W2C listings submitted yet.</p>`;
+      } else {
+        listingsContainer.innerHTML = w2cListings.map(listing => `
+          <div class="item-box">
+            <strong>${listing.material}</strong>
+            <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
+            <p class="small">${listing.location}</p>
+            <p class="small">${listing.notes || "No extra notes."}</p>
+            <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+            <p class="small">Payment: ${listing.paymentStatus}</p>
+
+            <div class="action-row">
+              <button class="btn btn-warning" onclick="updateListingStatus(${listing.id}, 'Matched')">Match Vendor</button>
+              <button class="btn btn-primary" onclick="updateListingStatus(${listing.id}, 'Sold')">Mark Sold</button>
+            </div>
+
+            <button class="btn btn-dark" onclick="markListingPaid(${listing.id})">Mark Paid</button>
+          </div>
+        `).join("");
+      }
     }
 
     function renderUI() {
-      const totalReports = reports.length;
-      const verifiedReports = reports.filter(r => r.status === "Verified").length;
-      const resolvedReports = reports.filter(r => r.status === "Resolved").length;
-      const ecoPoints = reports.reduce((sum, report) => sum + report.points, 0);
+      document.getElementById("totalReports").textContent = issueReports.length;
+      document.getElementById("verifiedReports").textContent = issueReports.filter(r => r.status === "Verified").length;
+      document.getElementById("totalListings").textContent = w2cListings.length;
+      document.getElementById("soldListings").textContent = w2cListings.filter(l => l.status === "Sold").length;
 
-      document.getElementById("totalReports").textContent = totalReports;
-      document.getElementById("verifiedReports").textContent = verifiedReports;
-      document.getElementById("resolvedReports").textContent = resolvedReports;
-      document.getElementById("ecoPoints").textContent = ecoPoints;
-      document.getElementById("rewardPoints").textContent = ecoPoints;
-      document.getElementById("rewardCash").textContent = convertPointsToCash(ecoPoints);
-      document.getElementById("profileReports").textContent = totalReports;
-      document.getElementById("profilePoints").textContent = ecoPoints;
+      document.getElementById("profileReports").textContent = issueReports.length;
+      document.getElementById("profileListings").textContent = w2cListings.length;
+      document.getElementById("profileSales").textContent = w2cListings.filter(l => l.status === "Sold").length;
 
-      renderReports("recentReports", reports.slice(0, 4));
-      renderReports("mapReportsList", reports);
-      renderRewards();
-      renderAdminReports();
+      renderIssueReports("recentReports", issueReports.slice(0, 4));
+      renderIssueReports("mapReportsList", issueReports);
+      renderW2CListings("recentListings", w2cListings.slice(0, 4));
+      renderMyListings();
+      renderAdminData();
     }
 
     renderUI();
-    if (isAdminLoggedIn()) {
-      // keeps admin session remembered
-    }
   </script>
 </body>
 </html>
