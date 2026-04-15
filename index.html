@@ -27,6 +27,7 @@
       min-height: 100vh;
       background: #fff;
       position: relative;
+      overflow-x: hidden;
     }
 
     .header {
@@ -47,8 +48,41 @@
       opacity: 0.95;
     }
 
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #111827;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .icon-btn:hover {
+      background: #f3f4f6;
+    }
+
     .section {
       padding: 18px;
+      padding-bottom: 90px;
     }
 
     .card {
@@ -154,6 +188,7 @@
       border-radius: 999px;
       font-size: 12px;
       margin-top: 8px;
+      font-weight: 600;
     }
 
     .badge-pending {
@@ -178,6 +213,7 @@
       grid-template-columns: repeat(4, 1fr);
       background: white;
       border-top: 1px solid #e5e7eb;
+      z-index: 15;
     }
 
     .nav button {
@@ -227,13 +263,87 @@
       display: block;
       margin-bottom: 4px;
     }
+
+    .fab {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: none;
+      background: #1f8f4d;
+      color: #fff;
+      font-size: 28px;
+      box-shadow: 0 8px 20px rgba(31,143,77,0.35);
+      cursor: pointer;
+      z-index: 30;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 240px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.12);
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 40;
+    }
+
+    .side-menu.show {
+      left: 0;
+    }
+
+    .side-menu h3 {
+      margin-bottom: 16px;
+      color: #1f8f4d;
+    }
+
+    .side-menu button {
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: left;
+      background: #f3f4f6;
+      color: #111827;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 35;
+    }
   </style>
 </head>
 <body>
   <div class="app">
+    <div id="sideMenu" class="side-menu">
+      <h3>Menu</h3>
+      <button onclick="navigateTo('dashboardPage')">Home</button>
+      <button onclick="navigateTo('reportPage')">Report Waste</button>
+      <button onclick="navigateTo('mapPage')">Map</button>
+      <button onclick="navigateTo('rewardsPage')">Rewards</button>
+      <button onclick="navigateTo('profilePage')">Profile</button>
+    </div>
+
+    <div id="menuOverlay" class="overlay hidden" onclick="toggleSideMenu()"></div>
+
     <div class="header">
       <h1>Ecoreport 🌱</h1>
       <p>Report waste. Track impact. Earn rewards.</p>
+    </div>
+
+    <div class="topbar">
+      <button class="icon-btn" onclick="goBack()">←</button>
+      <h3 id="pageTitle">Dashboard</h3>
+      <button class="icon-btn" onclick="toggleSideMenu()">☰</button>
     </div>
 
     <!-- DASHBOARD -->
@@ -260,8 +370,8 @@
         </div>
 
         <div class="top-actions">
-          <button class="btn btn-primary" onclick="showPage('reportPage')">+ Report Waste</button>
-          <button class="btn btn-warning" onclick="showPage('rewardsPage')">View Rewards</button>
+          <button class="btn btn-primary" onclick="navigateTo('reportPage')">+ Report Waste</button>
+          <button class="btn btn-warning" onclick="navigateTo('rewardsPage')">View Rewards</button>
         </div>
       </div>
 
@@ -296,7 +406,7 @@
         <textarea id="descriptionInput" placeholder="Describe the waste issue..."></textarea>
 
         <button class="btn btn-primary" onclick="submitReport()">Submit Report</button>
-        <button class="btn btn-secondary" onclick="showPage('dashboardPage')">Cancel</button>
+        <button class="btn btn-secondary" onclick="navigateTo('dashboardPage')">Cancel</button>
       </div>
     </div>
 
@@ -306,7 +416,7 @@
         <h3>Map View</h3>
         <div class="map-box">
           Live waste hotspot map will appear here.<br><br>
-          For now, this is the frontend placeholder for GPS/map integration.
+          This is the frontend placeholder for GPS/map integration.
         </div>
       </div>
 
@@ -357,36 +467,82 @@
       </div>
     </div>
 
-    <!-- BOTTOM NAV -->
+    <button class="fab" onclick="navigateTo('reportPage')">+</button>
+
     <div class="nav">
-      <button id="navDashboard" class="active" onclick="showPage('dashboardPage')">Home</button>
-      <button id="navReport" onclick="showPage('reportPage')">Report</button>
-      <button id="navMap" onclick="showPage('mapPage')">Map</button>
-      <button id="navProfile" onclick="showPage('profilePage')">Profile</button>
+      <button id="navDashboard" class="active" onclick="navigateTo('dashboardPage')">Home</button>
+      <button id="navReport" onclick="navigateTo('reportPage')">Report</button>
+      <button id="navMap" onclick="navigateTo('mapPage')">Map</button>
+      <button id="navProfile" onclick="navigateTo('profilePage')">Profile</button>
     </div>
   </div>
 
   <script>
     const STORAGE_KEY = "ecoreport_reports";
-
     let reports = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let pageHistory = [];
 
     function saveReports() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
     }
 
-    function showPage(pageId) {
-      document.querySelectorAll(".page").forEach(page => page.classList.add("hidden"));
-      document.getElementById(pageId).classList.remove("hidden");
+    function updateTitle(pageId) {
+      const titles = {
+        dashboardPage: "Dashboard",
+        reportPage: "Report Waste",
+        mapPage: "Map",
+        rewardsPage: "Rewards",
+        profilePage: "Profile"
+      };
+      document.getElementById("pageTitle").textContent = titles[pageId] || "Ecoreport";
+    }
 
+    function updateBottomNav(pageId) {
       document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
 
       if (pageId === "dashboardPage") document.getElementById("navDashboard").classList.add("active");
       if (pageId === "reportPage") document.getElementById("navReport").classList.add("active");
       if (pageId === "mapPage") document.getElementById("navMap").classList.add("active");
       if (pageId === "profilePage") document.getElementById("navProfile").classList.add("active");
+    }
 
+    function showPage(pageId, addToHistory = true) {
+      const currentPage = document.querySelector(".page:not(.hidden)");
+      if (currentPage && currentPage.id !== pageId && addToHistory) {
+        pageHistory.push(currentPage.id);
+      }
+
+      document.querySelectorAll(".page").forEach(page => page.classList.add("hidden"));
+      document.getElementById(pageId).classList.remove("hidden");
+
+      updateTitle(pageId);
+      updateBottomNav(pageId);
       renderUI();
+    }
+
+    function navigateTo(pageId) {
+      showPage(pageId, true);
+      closeSideMenu();
+    }
+
+    function goBack() {
+      if (pageHistory.length === 0) {
+        showPage("dashboardPage", false);
+        return;
+      }
+
+      const lastPage = pageHistory.pop();
+      showPage(lastPage, false);
+    }
+
+    function toggleSideMenu() {
+      document.getElementById("sideMenu").classList.toggle("show");
+      document.getElementById("menuOverlay").classList.toggle("hidden");
+    }
+
+    function closeSideMenu() {
+      document.getElementById("sideMenu").classList.remove("show");
+      document.getElementById("menuOverlay").classList.add("hidden");
     }
 
     function submitReport() {
@@ -418,7 +574,7 @@
       document.getElementById("photoInput").value = "";
 
       alert("Report submitted successfully.");
-      showPage("dashboardPage");
+      navigateTo("dashboardPage");
     }
 
     function getBadgeClass(status) {
@@ -440,6 +596,7 @@
           <strong>${report.wasteType}</strong>
           <p class="small">${report.location}</p>
           <p class="small">${report.description || "No description added."}</p>
+          <p class="small">${report.date}</p>
           <span class="${getBadgeClass(report.status)}">${report.status}</span>
         </div>
       `).join("");
