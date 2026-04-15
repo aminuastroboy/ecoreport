@@ -1,327 +1,469 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>EcoReport</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecoreport</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f8f5;
+      color: #1f2937;
+    }
 
-body{
-font-family:Arial;
-background:#eef4f7;
-margin:0;
-}
+    .hidden {
+      display: none !important;
+    }
 
-/* LANDING PAGE */
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+      position: relative;
+    }
 
-#landing{
-text-align:center;
-padding:50px 20px;
-max-width:700px;
-margin:auto;
-}
+    .header {
+      background: linear-gradient(135deg, #1f8f4d, #2db36c);
+      color: white;
+      padding: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
 
-#landing h1{
-color:#2f855a;
-font-size:40px;
-}
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
 
-.pitch-box{
-background:#f7fafc;
-padding:25px;
-border-radius:10px;
-margin-top:25px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-}
+    .header p {
+      font-size: 14px;
+      opacity: 0.95;
+    }
 
-.launch-btn{
-margin-top:20px;
-padding:14px 25px;
-background:#2f855a;
-color:white;
-border:none;
-border-radius:8px;
-font-size:16px;
-cursor:pointer;
-}
+    .section {
+      padding: 18px;
+    }
 
-/* APP */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
 
-.container{
-max-width:650px;
-margin:auto;
-padding:25px;
-}
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #111827;
+    }
 
-.header{
-background:#2f855a;
-color:white;
-padding:15px;
-border-radius:8px;
-margin-bottom:15px;
-}
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
 
-.stats{
-background:#f7fafc;
-padding:12px;
-border-radius:8px;
-margin-bottom:15px;
-}
+    .stat-box {
+      background: #f0fdf4;
+      border: 1px solid #d1fae5;
+      border-radius: 14px;
+      padding: 14px;
+    }
 
-input,textarea,select{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:6px;
-border:1px solid #ccc;
-}
+    .stat-box h4 {
+      font-size: 13px;
+      color: #166534;
+      margin-bottom: 8px;
+    }
 
-button{
-background:#2f855a;
-color:white;
-padding:12px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-width:100%;
-}
+    .stat-box p {
+      font-size: 22px;
+      font-weight: bold;
+      color: #111827;
+    }
 
-.report{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-top:12px;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
-border-left:6px solid #38a169;
-}
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
 
-.badge{
-display:none;
-color:green;
-font-weight:bold;
-margin-bottom:10px;
-}
+    .btn-primary {
+      background: #1f8f4d;
+      color: white;
+    }
 
-footer{
-text-align:center;
-margin-top:20px;
-font-size:12px;
-color:gray;
-}
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
 
-</style>
+    .btn-warning {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .input,
+    .select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      background: white;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .report-item,
+    .reward-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .badge-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge-verified {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-resolved {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .nav {
+      position: sticky;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: white;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .nav button {
+      border: none;
+      background: white;
+      padding: 14px 8px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #4b5563;
+    }
+
+    .nav button.active {
+      color: #1f8f4d;
+      font-weight: bold;
+    }
+
+    .map-box {
+      height: 220px;
+      background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+      border: 1px dashed #10b981;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #065f46;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .top-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .profile-row {
+      margin-bottom: 10px;
+    }
+
+    .profile-row strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- LANDING PAGE -->
-
-<div id="landing">
-
-<h1>EcoReport 🌱</h1>
-
-<p style="font-size:18px;color:#444;">
-Community Environmental Monitoring Platform
-</p>
-
-<div class="pitch-box">
-
-<h3>Problem</h3>
-<p>
-Many communities face illegal dumping, plastic pollution,
-and blocked drainage but citizens lack a simple way to report
-environmental problems.
-</p>
-
-<h3>Solution</h3>
-<p>
-EcoReport allows citizens to report waste problems,
-upload photo evidence, mark severity levels,
-and help identify environmental hotspots.
-</p>
-
-<h3>Impact</h3>
-<p>
-Encourages community participation,
-supports authorities with environmental data,
-and promotes cleaner communities.
-</p>
-
-<button class="launch-btn" onclick="startApp()">
-Launch EcoReport
-</button>
-
-</div>
-
-</div>
-
-
-<!-- APP -->
-
-<div id="app" style="display:none">
-
-<div class="container">
-
-<div class="header">
-<h2>EcoReport 🌱</h2>
-
-<p style="font-size:13px">
-Developed by: <b>Aminu Muhammad</b><br>
-3MTT ID: FE/23/47208556<br>
-Email: aminuastroboy@gmail.com<br>
-Phone: 07081197352
-</p>
-</div>
-
-<h3 id="points">Eco Points: 0</h3>
-
-<div id="badge" class="badge">
-🏆 Top Eco Reporter!
-</div>
-
-<div class="stats">
-<b>Community Stats</b><br>
-Reports Submitted: <span id="totalReports">0</span><br>
-High Severity Issues: <span id="highReports">0</span>
-</div>
-
-<h3>Report Waste</h3>
-
-<input id="location" placeholder="Location (e.g. Gwagwalada Market)">
-
-<select id="type">
-<option>Plastic Waste</option>
-<option>Organic Waste</option>
-<option>Illegal Dumping</option>
-<option>Blocked Drainage</option>
-</select>
-
-<select id="severity">
-<option>Low</option>
-<option>Medium</option>
-<option>High</option>
-</select>
-
-<textarea id="description" placeholder="Describe the issue"></textarea>
-
-<input type="file" id="photo" accept="image/*">
-
-<button onclick="submitReport()">Submit Report</button>
-
-<h3>Community Reports</h3>
-
-<div id="reports"></div>
-
-<footer>
-© 2026 EcoReport | Built for Community Impact Project
-</footer>
-
-</div>
-
-</div>
-
-<script>
-
-/* Landing Page */
-
-function startApp(){
-document.getElementById("landing").style.display="none"
-document.getElementById("app").style.display="block"
-}
-
-/* Data */
-
-let reports = JSON.parse(localStorage.getItem("ecoReports")) || []
-let points = 0
-
-function renderReports(){
-
-const reportsDiv=document.getElementById("reports")
-reportsDiv.innerHTML=""
-
-let highCount=0
-
-reports.forEach(report=>{
-
-if(report.severity==="High"){
-highCount++
-}
-
-const div=document.createElement("div")
-div.classList.add("report")
-
-div.innerHTML=
-"<b>Location:</b> "+report.location+"<br>"+
-"<b>Type:</b> "+report.type+"<br>"+
-"<b>Severity:</b> "+report.severity+"<br>"+
-"<b>Description:</b> "+report.description+"<br>"+
-"<small>Reported: "+report.time+"</small><br>"+
-(report.photoURL ? "<img src='"+report.photoURL+"' width='100%'>" : "")+
-"<br><a target='_blank' href='https://www.google.com/maps/search/"+report.location+"'>View on Map</a>"
-
-reportsDiv.appendChild(div)
-
-})
-
-document.getElementById("totalReports").innerText=reports.length
-document.getElementById("highReports").innerText=highCount
-
-}
-
-/* Submit Report */
-
-function submitReport(){
-
-const location=document.getElementById("location").value
-const type=document.getElementById("type").value
-const severity=document.getElementById("severity").value
-const description=document.getElementById("description").value
-const photoFile=document.getElementById("photo").files[0]
-
-if(!location || !description){
-alert("Please fill all fields")
-return
-}
-
-let photoURL=""
-
-if(photoFile){
-photoURL=URL.createObjectURL(photoFile)
-}
-
-const report={
-location,
-type,
-severity,
-description,
-photoURL,
-time:new Date().toLocaleString()
-}
-
-reports.push(report)
-
-localStorage.setItem("ecoReports",JSON.stringify(reports))
-
-points+=10
-
-document.getElementById("points").innerText="Eco Points: "+points
-
-if(points>=50){
-document.getElementById("badge").style.display="block"
-}
-
-renderReports()
-
-document.getElementById("location").value=""
-document.getElementById("description").value=""
-document.getElementById("photo").value=""
-
-}
-
-renderReports()
-
-</script>
-
+  <div class="app">
+    <div class="header">
+      <h1>Ecoreport 🌱</h1>
+      <p>Report waste. Track impact. Earn rewards.</p>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboardPage" class="section page">
+      <div class="card">
+        <h3>Overview</h3>
+        <div class="stats">
+          <div class="stat-box">
+            <h4>Total Reports</h4>
+            <p id="totalReports">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Verified Reports</h4>
+            <p id="verifiedReports">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Resolved Issues</h4>
+            <p id="resolvedReports">0</p>
+          </div>
+          <div class="stat-box">
+            <h4>Eco Points</h4>
+            <p id="ecoPoints">0</p>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <button class="btn btn-primary" onclick="showPage('reportPage')">+ Report Waste</button>
+          <button class="btn btn-warning" onclick="showPage('rewardsPage')">View Rewards</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Recent Reports</h3>
+        <div id="recentReports"></div>
+      </div>
+    </div>
+
+    <!-- REPORT PAGE -->
+    <div id="reportPage" class="section page hidden">
+      <div class="card">
+        <h3>Submit Waste Report</h3>
+
+        <label>Waste Type</label>
+        <select id="wasteType" class="select">
+          <option value="">Select waste type</option>
+          <option>Plastic Waste</option>
+          <option>Illegal Dump Site</option>
+          <option>Drain Blockage</option>
+          <option>Organic Waste</option>
+          <option>Metal Waste</option>
+        </select>
+
+        <label>Location</label>
+        <input id="locationInput" class="input" placeholder="Enter location or community name" />
+
+        <label>Photo</label>
+        <input id="photoInput" class="input" type="file" accept="image/*" />
+
+        <label>Description</label>
+        <textarea id="descriptionInput" placeholder="Describe the waste issue..."></textarea>
+
+        <button class="btn btn-primary" onclick="submitReport()">Submit Report</button>
+        <button class="btn btn-secondary" onclick="showPage('dashboardPage')">Cancel</button>
+      </div>
+    </div>
+
+    <!-- MAP PAGE -->
+    <div id="mapPage" class="section page hidden">
+      <div class="card">
+        <h3>Map View</h3>
+        <div class="map-box">
+          Live waste hotspot map will appear here.<br><br>
+          For now, this is the frontend placeholder for GPS/map integration.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Reported Hotspots</h3>
+        <div id="mapReportsList"></div>
+      </div>
+    </div>
+
+    <!-- REWARDS PAGE -->
+    <div id="rewardsPage" class="section page hidden">
+      <div class="card">
+        <h3>Rewards & Points</h3>
+        <p><strong>Current Balance:</strong> <span id="rewardPoints">0</span> points</p>
+        <p class="small">Earn points when your reports are verified and resolved.</p>
+      </div>
+
+      <div class="card">
+        <h3>How You Earn</h3>
+        <div class="reward-item">+10 points for submitting a report</div>
+        <div class="reward-item">+20 points when a report is verified</div>
+        <div class="reward-item">+30 points when a report is marked resolved</div>
+      </div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div id="profilePage" class="section page hidden">
+      <div class="card">
+        <h3>My Profile</h3>
+        <div class="profile-row">
+          <strong>Name</strong>
+          <p>Aminu Muhammad</p>
+        </div>
+        <div class="profile-row">
+          <strong>Role</strong>
+          <p>Community Reporter</p>
+        </div>
+        <div class="profile-row">
+          <strong>Badge</strong>
+          <p>Eco Starter 🌱</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>My Impact</h3>
+        <p>Total submissions: <strong id="profileReports">0</strong></p>
+        <p>Points earned: <strong id="profilePoints">0</strong></p>
+      </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="nav">
+      <button id="navDashboard" class="active" onclick="showPage('dashboardPage')">Home</button>
+      <button id="navReport" onclick="showPage('reportPage')">Report</button>
+      <button id="navMap" onclick="showPage('mapPage')">Map</button>
+      <button id="navProfile" onclick="showPage('profilePage')">Profile</button>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "ecoreport_reports";
+
+    let reports = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    function saveReports() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(reports));
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.add("hidden"));
+      document.getElementById(pageId).classList.remove("hidden");
+
+      document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
+
+      if (pageId === "dashboardPage") document.getElementById("navDashboard").classList.add("active");
+      if (pageId === "reportPage") document.getElementById("navReport").classList.add("active");
+      if (pageId === "mapPage") document.getElementById("navMap").classList.add("active");
+      if (pageId === "profilePage") document.getElementById("navProfile").classList.add("active");
+
+      renderUI();
+    }
+
+    function submitReport() {
+      const wasteType = document.getElementById("wasteType").value;
+      const location = document.getElementById("locationInput").value.trim();
+      const description = document.getElementById("descriptionInput").value.trim();
+
+      if (!wasteType || !location) {
+        alert("Please fill in waste type and location.");
+        return;
+      }
+
+      const report = {
+        id: Date.now(),
+        wasteType,
+        location,
+        description,
+        status: "Pending",
+        points: 10,
+        date: new Date().toLocaleString()
+      };
+
+      reports.unshift(report);
+      saveReports();
+
+      document.getElementById("wasteType").value = "";
+      document.getElementById("locationInput").value = "";
+      document.getElementById("descriptionInput").value = "";
+      document.getElementById("photoInput").value = "";
+
+      alert("Report submitted successfully.");
+      showPage("dashboardPage");
+    }
+
+    function getBadgeClass(status) {
+      if (status === "Verified") return "badge badge-verified";
+      if (status === "Resolved") return "badge badge-resolved";
+      return "badge badge-pending";
+    }
+
+    function renderReports(containerId, items) {
+      const container = document.getElementById(containerId);
+
+      if (!items.length) {
+        container.innerHTML = `<p class="small">No reports yet.</p>`;
+        return;
+      }
+
+      container.innerHTML = items.map(report => `
+        <div class="report-item">
+          <strong>${report.wasteType}</strong>
+          <p class="small">${report.location}</p>
+          <p class="small">${report.description || "No description added."}</p>
+          <span class="${getBadgeClass(report.status)}">${report.status}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderUI() {
+      const totalReports = reports.length;
+      const verifiedReports = reports.filter(r => r.status === "Verified").length;
+      const resolvedReports = reports.filter(r => r.status === "Resolved").length;
+      const ecoPoints = reports.reduce((sum, report) => sum + report.points, 0);
+
+      document.getElementById("totalReports").textContent = totalReports;
+      document.getElementById("verifiedReports").textContent = verifiedReports;
+      document.getElementById("resolvedReports").textContent = resolvedReports;
+      document.getElementById("ecoPoints").textContent = ecoPoints;
+      document.getElementById("rewardPoints").textContent = ecoPoints;
+      document.getElementById("profileReports").textContent = totalReports;
+      document.getElementById("profilePoints").textContent = ecoPoints;
+
+      renderReports("recentReports", reports.slice(0, 4));
+      renderReports("mapReportsList", reports);
+    }
+
+    renderUI();
+  </script>
 </body>
 </html>
