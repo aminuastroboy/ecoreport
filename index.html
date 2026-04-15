@@ -159,6 +159,11 @@
       color: white;
     }
 
+    .btn-blue {
+      background: #2563eb;
+      color: white;
+    }
+
     .input,
     .select,
     textarea {
@@ -222,6 +227,11 @@
     .badge-sold {
       background: #dcfce7;
       color: #166534;
+    }
+
+    .badge-paid {
+      background: #fce7f3;
+      color: #9d174d;
     }
 
     .small {
@@ -363,6 +373,7 @@
       <button onclick="navigateTo('mapPage')">Map</button>
       <button onclick="navigateTo('w2cPage')">Waste-to-Cash</button>
       <button onclick="navigateTo('myListingsPage')">My Listings</button>
+      <button onclick="navigateTo('vendorPage')">Vendor Marketplace</button>
       <button onclick="navigateTo('profilePage')">Profile</button>
       <button onclick="navigateTo('adminLoginPage')">Admin</button>
     </div>
@@ -511,6 +522,23 @@
       </div>
     </div>
 
+    <div id="vendorPage" class="section page hidden">
+      <div class="card">
+        <h3>Vendor Marketplace</h3>
+        <p class="small">Vendors can see available recyclable materials and accept pickup deals.</p>
+      </div>
+
+      <div class="card">
+        <h3>Available Listings</h3>
+        <div id="vendorListingsList"></div>
+      </div>
+
+      <div class="card">
+        <h3>Accepted Listings</h3>
+        <div id="vendorAcceptedList"></div>
+      </div>
+    </div>
+
     <div id="profilePage" class="section page hidden">
       <div class="card">
         <h3>My Profile</h3>
@@ -627,6 +655,7 @@
         mapPage: "Map",
         w2cPage: "Waste-to-Cash",
         myListingsPage: "My Listings",
+        vendorPage: "Vendor Marketplace",
         profilePage: "Profile",
         adminLoginPage: "Admin Login",
         adminPage: "Admin Panel"
@@ -638,7 +667,9 @@
       document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
       if (pageId === "dashboardPage") document.getElementById("navDashboard").classList.add("active");
       if (pageId === "reportPage") document.getElementById("navReport").classList.add("active");
-      if (pageId === "w2cPage" || pageId === "myListingsPage") document.getElementById("navW2C").classList.add("active");
+      if (pageId === "w2cPage" || pageId === "myListingsPage" || pageId === "vendorPage") {
+        document.getElementById("navW2C").classList.add("active");
+      }
       if (pageId === "profilePage") document.getElementById("navProfile").classList.add("active");
     }
 
@@ -736,7 +767,7 @@
         price,
         notes,
         status: "Open",
-        buyer: "",
+        vendorName: "",
         paymentStatus: "Pending",
         date: new Date().toISOString()
       };
@@ -799,6 +830,30 @@
       renderUI();
     }
 
+    function vendorAcceptListing(id) {
+      const listing = w2cListings.find(item => item.id === id);
+      if (!listing) return;
+
+      const vendorName = prompt("Enter vendor name:");
+      if (!vendorName) return;
+
+      listing.status = "Matched";
+      listing.vendorName = vendorName;
+      saveW2CListings();
+      renderUI();
+      alert("Listing accepted by vendor.");
+    }
+
+    function vendorCompletePickup(id) {
+      const listing = w2cListings.find(item => item.id === id);
+      if (!listing) return;
+
+      listing.status = "Sold";
+      saveW2CListings();
+      renderUI();
+      alert("Pickup completed.");
+    }
+
     function getIssueBadgeClass(status) {
       if (status === "Verified") return "badge badge-verified";
       if (status === "Resolved") return "badge badge-resolved";
@@ -846,6 +901,7 @@
           <p class="small">${listing.notes || "No extra notes."}</p>
           <p class="small">${new Date(listing.date).toLocaleString()}</p>
           <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+          ${listing.vendorName ? `<p class="small">Vendor: ${listing.vendorName}</p>` : ""}
           <p class="small">Payment: ${listing.paymentStatus}</p>
         </div>
       `).join("");
@@ -866,9 +922,48 @@
           <p class="small">Location: ${listing.location}</p>
           <p class="small">Price: ₦${listing.price}</p>
           <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+          ${listing.vendorName ? `<p class="small">Vendor: ${listing.vendorName}</p>` : ""}
           <p class="small">Payment: ${listing.paymentStatus}</p>
         </div>
       `).join("");
+    }
+
+    function renderVendorPage() {
+      const availableContainer = document.getElementById("vendorListingsList");
+      const acceptedContainer = document.getElementById("vendorAcceptedList");
+
+      const availableListings = w2cListings.filter(item => item.status === "Open");
+      const acceptedListings = w2cListings.filter(item => item.status === "Matched");
+
+      if (!availableListings.length) {
+        availableContainer.innerHTML = `<p class="small">No open listings available.</p>`;
+      } else {
+        availableContainer.innerHTML = availableListings.map(listing => `
+          <div class="item-box">
+            <strong>${listing.material}</strong>
+            <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
+            <p class="small">${listing.location}</p>
+            <p class="small">${listing.notes || "No extra notes."}</p>
+            <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+            <button class="btn btn-blue" onclick="vendorAcceptListing(${listing.id})">Accept Listing</button>
+          </div>
+        `).join("");
+      }
+
+      if (!acceptedListings.length) {
+        acceptedContainer.innerHTML = `<p class="small">No accepted listings yet.</p>`;
+      } else {
+        acceptedContainer.innerHTML = acceptedListings.map(listing => `
+          <div class="item-box">
+            <strong>${listing.material}</strong>
+            <p class="small">${listing.quantity} ${listing.unit} • ₦${listing.price}</p>
+            <p class="small">${listing.location}</p>
+            <p class="small">Vendor: ${listing.vendorName || "Assigned vendor"}</p>
+            <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+            <button class="btn btn-primary" onclick="vendorCompletePickup(${listing.id})">Mark Pickup Complete</button>
+          </div>
+        `).join("");
+      }
     }
 
     function renderAdminData() {
@@ -908,6 +1003,7 @@
             <p class="small">${listing.location}</p>
             <p class="small">${listing.notes || "No extra notes."}</p>
             <span class="${getListingBadgeClass(listing.status)}">${listing.status}</span>
+            ${listing.vendorName ? `<p class="small">Vendor: ${listing.vendorName}</p>` : ""}
             <p class="small">Payment: ${listing.paymentStatus}</p>
 
             <div class="action-row">
@@ -935,6 +1031,7 @@
       renderIssueReports("mapReportsList", issueReports);
       renderW2CListings("recentListings", w2cListings.slice(0, 4));
       renderMyListings();
+      renderVendorPage();
       renderAdminData();
     }
 
